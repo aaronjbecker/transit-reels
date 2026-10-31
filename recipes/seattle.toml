@@ -1,0 +1,15 @@
+title = "Seattle"
+subtitle = "Link, ferries, Sounder, streetcar and bus"
+
+[feed]
+url = "https://gtfs.sound.obaweb.org/prod/gtfs_puget_sound_consolidated.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1080/latest.zip"
+attribution = "Timetable: Puget Sound consolidated GTFS (OneBusAway)"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-122.33, 47.555]
+width_km = 42

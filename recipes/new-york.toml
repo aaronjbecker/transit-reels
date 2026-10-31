@@ -1,0 +1,70 @@
+title = "New York City"
+subtitle = "subway, bus, LIRR and Metro-North"
+
+# MTA terms (https://www.mta.info/developers/terms-and-conditions, updated 13 Mar 2024) allow
+# downloading, hosting and making the data available to others; they ask for no credit line,
+# forbid stating or implying the use is licensed by the MTA, and allow saying the data came
+# from the MTA. The live page refuses scripts (403); the text was read from the Wayback
+# Machine copy of 14 Jul 2026.
+# Not included: NYC Ferry. Its Developer Terms (https://www.ferry.nyc/developer-tools/) grant
+# use only "to test, design, and support your products and services", and its site terms
+# (https://www.ferry.nyc/legal/) forbid publication except as those terms permit: unclear for
+# a published video.
+
+[[feeds]]
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-516/latest.zip"
+attribution = "Timetables: MTA (NYC Transit, MTA Bus, LIRR, Metro-North), not endorsed by the MTA"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Manhattan buses
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_m.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-513/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Brooklyn buses
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_b.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-512/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Bronx buses
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_bx.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-528/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Queens buses
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_q.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-520/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Staten Island buses
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_si.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-514/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # MTA Bus Company (Queens, Brooklyn, Bronx express and local)
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_busco.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-510/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Long Island Rail Road
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfslirr.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-507/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[[feeds]]   # Metro-North Railroad
+url = "https://rrgtfsfeeds.s3.amazonaws.com/gtfsmnr.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-524/latest.zip"
+license = "https://www.mta.info/developers/terms-and-conditions"
+
+[time]
+# The default date (next-weekday) checks every feed, so it skips days like Election Day,
+# when the MTA buses run a reduced timetable.
+
+[map]
+center = [-73.94, 40.735]
+width_km = 20
+
+[map.horizontal]   # wider: the title sits over New Jersey, clear of Manhattan
+center = [-73.935, 40.745]
+width_km = 40

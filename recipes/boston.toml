@@ -1,0 +1,15 @@
+title = "Boston"
+subtitle = "subway, commuter rail, ferry and bus"
+
+[feed]
+url = "https://cdn.mbta.com/MBTA_GTFS.zip"
+attribution = "Timetable: MBTA GTFS, {weekday}, {date}"
+license = "https://www.mass.gov/files/documents/2017/10/27/develop_license_agree_0.pdf"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-71.075, 42.335]
+width_km = 17

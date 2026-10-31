@@ -1,0 +1,38 @@
+title = "Chicago"
+subtitle = "‘L’, bus and Metra"
+
+# CTA Developer License Agreement (https://www.transitchicago.com/developers/terms/, also
+# shipped in the feed as developers_license_agreement.htm): license to use, reproduce,
+# distribute, display and create derivative works "for the sole purpose of assisting mass
+# transportation riders or in furtherance of promoting public transportation"; a credit line
+# is optional ("Data provided by Chicago Transit Authority"); no implied affiliation or
+# endorsement.
+# Metra license (https://metra.com/gtfs-realtime-api-key-request-license-agreement, which
+# https://metra.com/developers names for all its feeds): use, reproduce and redistribute, but
+# every representation must say it is not sponsored, affiliated or operated by Metra and give
+# the date and time the data was last updated. The date below is the feed's Last-Modified
+# header when it was downloaded; change it when the feed is downloaded again.
+# Not included: Pace (https://www.pacebus.com/route-timetable-data-services). Its data is shared
+# "for non commercial use" "to assist you with mass transportation", and its name may not be
+# used without Pace's written consent, so it cannot even be credited: unclear for a published
+# video.
+
+[[feeds]]
+url = "https://www.transitchicago.com/downloads/sch_data/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-389/latest.zip"
+attribution = "Data provided by Chicago Transit Authority"
+license = "https://www.transitchicago.com/developers/terms/"
+
+[[feeds]]
+url = "https://schedules.metrarail.com/gtfs/schedule.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2854/latest.zip"
+attribution = "Metra schedule data, last updated Oct 22, 2026 07:20 UTC  ·  not sponsored, affiliated or operated by Metra or CTA"
+license = "https://metra.com/gtfs-realtime-api-key-request-license-agreement"
+
+[map]
+center = [-87.68, 41.86]
+width_km = 26
+
+[map.horizontal]
+center = [-87.70, 41.86]
+width_km = 40

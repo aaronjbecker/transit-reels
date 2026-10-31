@@ -1,0 +1,103 @@
+# Every recipe key, with its default. Only `title` and a feed are required.
+# Render with:  uv run transit-reels render recipes/example.toml
+
+title = "Boston"
+subtitle = "subway, commuter rail, ferry and bus"
+# {weekday} {date} {minutes} are filled in: "Tuesday", "Nov 3, 2026", "20".
+note = "every scheduled vehicle · {weekday}, {date}"
+# slug = "boston"            # names the output folder; defaults to the file name
+
+[feed]
+url = "https://cdn.mbta.com/MBTA_GTFS.zip"
+mirror = ""                  # tried if the url fails (the `find` command prints one)
+path = ""                    # or a local .zip / folder instead of a url
+attribution = "Timetable: MBTA GTFS"   # shown on the map; use the license's required words
+license = "https://www.mass.gov/files/documents/2017/10/27/develop_license_agree_0.pdf"  # a note, not drawn
+# A feed that needs an API key: name the key (store it with `transit-reels key set <name>`,
+# never here), say how it is sent, and where to sign up. `find` prints these lines.
+# key = "trafiklab"
+# key_param = "key"          # or key_header = "Ocp-Apim-Subscription-Key"
+# signup = "https://developer.trafiklab.se/register"
+# route_types = [0, 1, 2, 3, 4]        # keep only these modes (default: all)
+
+# A city whose agencies publish separately: replace [feed] with one [[feeds]] per agency.
+# Each takes every key [feed] takes. The day is chosen from the first; credits are joined.
+# [[feeds]]
+# url = "..."
+# mirror = "..."
+# attribution = "..."
+# [[feeds]]
+# url = "..."
+# attribution = "..."
+# route_types = [4]          # e.g. only this operator's ferries
+
+[time]
+# The morning peak: 08:00, 20 minutes of timetable in a 10 s video. start / minutes and
+# [video] seconds move it. Past 4 minutes of timetable a second the dots blur (you get a warning).
+# next-weekday: of the Tue-Thu in the 3 weeks from tomorrow, the earliest within 3% of the busiest
+# (skips holiday timetables). Or a date the feed's calendar covers: "2026-11-04".
+date = "next-weekday"
+# start = "08:00"            # the agency's local time, as in the timetable
+# minutes = 20               # of timetable shown
+
+[video]
+format = "vertical"          # vertical (Reels, TikTok, Shorts), horizontal (X, LinkedIn,
+                             # YouTube) or square. Or per run: render --format horizontal
+fps = 30
+# seconds = 10
+# width = 1080               # override the format's size
+# height = 1920
+
+[map]
+# center = [-71.06, 42.36]   # lon, lat; with width_km, replaces auto framing
+# width_km = 25             # true ground distance across the frame at its center
+# Other formats keep the center and the ground area; or frame one yourself:
+# [map.horizontal]
+# center = [-71.06, 42.35]
+# width_km = 40
+water = true                 # sea, lakes, rivers from OpenStreetMap
+
+[style]
+land = "#25272c"
+water = "#0c0d10"
+text = "#ffffff"
+muted = "#b4b8c0"
+# Route types drawn as colored lines with vehicles riding inside them. GTFS codes: 0 tram,
+# 1 subway, 2 rail, 3 bus, 4 ferry, 5 cable tram, 6 aerial lift, 7 funicular,
+# 11 trolleybus, 12 monorail. thin_types (trams) get a thin line in their own color and
+# tinted dots. The rest are white dots on a thin slate network.
+line_types = [1, 2, 4, 5, 6, 7, 12]
+thin_types = [0]
+thin_width = 1.5
+thin_alpha = 0.45
+thin_whiten = 0.8
+color_by = "route"           # or "mode": one color per mode, for whole countries
+# mode_colors = { "2" = "#ff8a4c", "4" = "#8ec9ff" }   # with color_by = "mode"
+line_width = 5.5             # px for a 1080 frame
+line_alpha = 0.85
+network = "#5b7396"
+network_width = 1.0
+network_alpha = 0.45
+dot_color = "#ffffff"
+text_shadow = 0.8            # soft shadow under the letters (0 = none)
+# title_top = 250            # px from the top (1080 scale); default 250 vertical, 72 otherwise
+# credit_y = 0.80            # credit line, fraction of the height; default 0.80 vertical
+counter = "{n:,} vehicles"   # vehicles inside the frame at that moment; "" to hide
+
+glow_max = 0.12              # the most the halos cover where many overlap
+outline = "#9a9fa8"          # a faint gray rim around every dot; "" for none
+outline_width = 1.2          # px for a 1080 frame
+outline_alpha = 0.85
+
+[style.dot]                  # buses: a small crisp dot
+radius = 1.5                 # px for a 1080 frame
+gain = 4.0                   # how opaque; overlapping dots blend to their mean color
+glow_sigma = 2.5
+glow_gain = 0.12             # a faint halo around each dot; 0 for none
+
+[style.line_dot]             # trains, trams, ferries
+radius = 2.8
+gain = 5.0
+glow_sigma = 3.5
+glow_gain = 0.25
+whiten = 0.88                # lift the line color toward white so trains show on their line

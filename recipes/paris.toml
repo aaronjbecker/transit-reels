@@ -1,0 +1,16 @@
+title = "Paris"
+subtitle = "métro, RER, Transilien, tram and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/413988ed-d340-467b-8be2-7b999fcd207a"
+mirror = "https://files.mobilitydatabase.org/tdg-80921/latest.zip"
+attribution = "Timetable: Île-de-France Mobilités GTFS"
+license = "https://wiki.lafabriquedesmobilites.fr/wiki/Licence_Mobilit%C3%A9s"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [2.345, 48.845]
+width_km = 26

@@ -1,0 +1,15 @@
+[project]
+name = "transit-reels"
+version = "0.1.0"
+description = "Turn any city's GTFS timetable into an animated map of every scheduled vehicle."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.24", "pillow>=10.0", "imageio-ffmpeg>=0.5"]
+
+[project.scripts]
+transit-reels = "transit_reels.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
