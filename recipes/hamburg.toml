@@ -1,0 +1,15 @@
+title = "Hamburg"
+subtitle = "U-Bahn, S-Bahn, harbor ferries and bus"
+
+[feed]
+# hvv Fahrplandaten (GTFS) Oktober 2026 bis Dezember 2026, Hamburg Transparency Portal:
+# https://suche.transparenz.hamburg.de/dataset/hvv-fahrplandaten-gtfs-oktober-2026-bis-dezember-2026
+url = "https://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/1b19df89-2221-4632-ae93-5fb414b2289f/Upload__hvv_Rohdaten_GTFS_Fpl_20261002.ZIP"
+mirror = "https://files.mobilitydatabase.org/mdb-3362/latest.zip"
+# dl-de/by-2-0 asks for the provider, the license and a note that the data was changed.
+attribution = "Timetable: Hamburger Verkehrsverbund GmbH (hvv), dl-de/by-2-0, adapted"
+license = "https://www.govdata.de/dl-de/by-2-0"
+
+[map]
+center = [9.99, 53.555]
+width_km = 22

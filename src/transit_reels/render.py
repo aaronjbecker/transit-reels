@@ -39,8 +39,9 @@ def draw_rank(route_type: int, style: dict) -> int:
 def route_color(route: dict, style: dict) -> np.ndarray:
     if route["type"] not in style["line_types"] and route["type"] not in style["thin_types"]:
         return rgb(style["dot_color"])
-    if style.get("color_by") == "mode":
-        return rgb(style.get("mode_colors", {}).get(str(route["type"])) or FALLBACK.get(route["type"], "#ffffff"))
+    mode = style.get("mode_colors", {}).get(str(route["type"]))
+    if style.get("color_by") == "mode" or mode:  # by mode, or just this mode recolored
+        return rgb(mode or FALLBACK.get(route["type"], "#ffffff"))
     c = route.get("color")
     if c and len(c) == 7:
         v = rgb(c)

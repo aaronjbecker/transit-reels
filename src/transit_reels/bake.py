@@ -142,8 +142,11 @@ def bake(feed: Feed, day: dt.date, start_s: int, end_s: int, route_types: list[i
 
     routes = {}
     for r in feed.rows("routes.txt"):
-        rtype = base_route_type(int(r.get("route_type") or 3))
-        if route_types is not None and rtype not in route_types:
+        raw = int(r.get("route_type") or 3)
+        rtype = base_route_type(raw)
+        # route_types may name basic codes (2: all rail) or a feed's extended ones (109: suburban
+        # rail only), so a recipe can keep the S-Bahn and leave out regional trains.
+        if route_types is not None and rtype not in route_types and raw not in route_types:
             continue
         routes[r["route_id"]] = {
             "type": rtype,

@@ -1,0 +1,15 @@
+title = "Berlin"
+subtitle = "U-Bahn, S-Bahn, tram, ferry and bus"
+
+[feed]
+url = "https://www.vbb.de/vbbgtfs"
+mirror = "https://files.mobilitydatabase.org/mdb-782/latest.zip"
+attribution = "Timetable: VBB Verkehrsverbund Berlin-Brandenburg GmbH, CC BY 4.0"
+license = "https://www.vbb.de/vbb-services/api-open-data/datensaetze/"
+# S-Bahn (109), U-Bahn (400), tram (900), ferry (1000), bus (3, 700). Regional and express
+# trains (100, 106) are left out: their shapes are straight lines between stations.
+route_types = [109, 400, 900, 1000, 3, 700]
+
+[map]
+center = [13.40, 52.51]
+width_km = 21

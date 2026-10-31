@@ -18,7 +18,8 @@ license = "https://www.mass.gov/files/documents/2017/10/27/develop_license_agree
 # key = "trafiklab"
 # key_param = "key"          # or key_header = "Ocp-Apim-Subscription-Key"
 # signup = "https://developer.trafiklab.se/register"
-# route_types = [0, 1, 2, 3, 4]        # keep only these modes (default: all)
+# route_types = [0, 1, 2, 3, 4]        # keep only these modes (default: all). A feed's
+#   extended codes work too: [109] keeps suburban rail (S-Bahn) but not 106 regional trains
 
 # A city whose agencies publish separately: replace [feed] with one [[feeds]] per agency.
 # Each takes every key [feed] takes. The day is chosen from the first; credits are joined.
@@ -72,7 +73,8 @@ thin_width = 1.5
 thin_alpha = 0.45
 thin_whiten = 0.8
 color_by = "route"           # or "mode": one color per mode, for whole countries
-# mode_colors = { "2" = "#ff8a4c", "4" = "#8ec9ff" }   # with color_by = "mode"
+# mode_colors = { "2" = "#ff8a4c", "4" = "#8ec9ff" }   # with color_by = "mode": every mode;
+#   with "route": only the listed modes, e.g. when an agency's tram color is too dark to read
 line_width = 5.5             # px for a 1080 frame
 line_alpha = 0.85
 network = "#5b7396"

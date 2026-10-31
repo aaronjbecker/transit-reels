@@ -1,0 +1,19 @@
+title = "Prague"
+subtitle = "metro, tram, train, ferry and bus"
+
+[feed]
+url = "http://data.pid.cz/PID_GTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-767/latest.zip"
+attribution = "Timetable: PID / ROPID, CC BY 4.0"
+license = "https://pid.cz/o-systemu/opendata/"
+
+[map]
+center = [14.435, 50.08]
+width_km = 13
+
+[style]
+# PID colors trams deep maroon and trains navy, both lost on the dark map: the trams are the
+# subject, so they get a pale tram-cream and a firmer line; trains a light version of PID's blue.
+mode_colors = { "0" = "#f3c9b8", "2" = "#8f9cff" }
+thin_width = 2.2
+thin_alpha = 0.7
