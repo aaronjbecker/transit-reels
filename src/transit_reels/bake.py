@@ -129,6 +129,20 @@ def _drop_bad_stops(stops: dict, log=print):
 
 STRAIGHT_TYPES = {4, 6}  # ferries and aerial lifts really do go (nearly) straight
 
+# Fastest believable speed between two stops, km/h, by basic route type. A run that needs more
+# has a stop placed on the wrong stretch of its shape, or broken times, and would streak across
+# the map. Generous on purpose: the half minute of slack in _too_fast absorbs times rounded to
+# the minute, so only real errors trip it.
+MAX_KMH = {0: 100, 1: 130, 2: 250, 3: 120, 4: 80, 5: 50, 6: 50, 7: 50, 11: 120, 12: 120}
+SLACK_S = 30
+
+
+def _too_fast(stop_d: np.ndarray, arr: np.ndarray, dep: np.ndarray, route_type: int) -> bool:
+    """True if any stop-to-stop hop is faster than the mode can go."""
+    dist_km = np.diff(stop_d) / 1000
+    hours = (np.maximum(arr[1:] - dep[:-1], 0) + SLACK_S) / 3600
+    return bool((dist_km / hours > MAX_KMH.get(route_type, 250)).any())
+
 
 def bake(feed: Feed, day: dt.date, start_s: int, end_s: int, route_types: list[int] | None = None,
          margin_s: int = 120, log=print, straight: bool = False) -> dict:
@@ -233,6 +247,7 @@ def bake(feed: Feed, day: dt.date, start_s: int, end_s: int, route_types: list[i
             "the agency's own feed often does when a national aggregate does not).\n"
             "  Or accept straight lines: add `straight = true` to this feed in the recipe.")
     dropped: dict[str, int] = defaultdict(int)
+    too_fast: dict[str, int] = defaultdict(int)
     for tid, shift in instances:
         rows = [r for r in stop_times[tid] if r[3] in stops]
         if len(rows) < 2:
@@ -258,6 +273,9 @@ def bake(feed: Feed, day: dt.date, start_s: int, end_s: int, route_types: list[i
         arr, dep = _fill_times(pat.stop_d, [r[1] for r in rows], [r[2] for r in rows])
         if np.isnan(arr).any():
             continue
+        if _too_fast(pat.stop_d, arr, dep, routes[route_id]["type"]):
+            too_fast[route_id] += 1
+            continue
         t = pat.times(arr + shift, dep + shift)
         # Keep only the stretch inside the window (plus one vertex either side to interpolate).
         i0 = max(int(np.searchsorted(t, lo, "right")) - 1, 0)
@@ -281,6 +299,11 @@ def bake(feed: Feed, day: dt.date, start_s: int, end_s: int, route_types: list[i
         log(f"  ! left out {sum(dropped.values()):,} runs on {len(dropped)} route(s) with no route shape "
             f"({names}{' ...' if len(dropped) > 8 else ''}): a straight line between stops would be a wrong path. "
             "`straight = true` on the feed draws them anyway")
+    if too_fast:
+        names = ", ".join(sorted({routes[r].get("short") or r for r in too_fast})[:8])
+        log(f"  ! left out {sum(too_fast.values()):,} runs on {len(too_fast)} route(s) that would move faster "
+            f"than the mode can ({names}{' ...' if len(too_fast) > 8 else ''}): a stop placed on the wrong "
+            "stretch of the shape, or broken times in the feed")
     used_routes = {tr["route"] for tr in out_trips}
     log(f"  baked {len(out_trips):,} vehicle runs on {len(used_routes)} routes, {len(network)} distinct paths "
         f"(window plus {margin_s // 60} min either side)")

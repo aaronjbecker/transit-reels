@@ -36,7 +36,7 @@ numpy and Pillow, plus a bundled ffmpeg.
 
 | Paris | New York | Seattle |
 |---|---|---|
-| 11,223 runs in 20 minutes, 841 of them métro | 5,845 runs, nine MTA feeds merged | 1,486 runs, 36 of them ferries |
+| 11,205 runs in 20 minutes, 841 of them métro | 5,845 runs, nine MTA feeds merged | 1,486 runs, 36 of them ferries |
 
 Every reel above was made from a recipe in [`recipes/`](recipes), so you can make it again
 exactly.

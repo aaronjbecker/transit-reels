@@ -174,7 +174,7 @@ def bake_cached(recipe: dict) -> tuple[dict, dt.date]:
     end = start + int(t["minutes"] * 60)
     work = recipe_mod.work_dir(recipe)
     out = work / "bake.npz"
-    key = json.dumps([[str(f.path), f.path.stat().st_mtime, spec["route_types"], spec["retype"], spec["straight"], 4]
+    key = json.dumps([[str(f.path), f.path.stat().st_mtime, spec["route_types"], spec["retype"], spec["straight"], 5]
                       for f, spec in zip(feeds, recipe["feeds"])]
                      + [day.isoformat(), start, end])
     stamp = work / "bake.key"

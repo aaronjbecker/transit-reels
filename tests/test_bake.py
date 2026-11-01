@@ -188,3 +188,15 @@ class ExtendedRouteTypeTest(unittest.TestCase):
             all_rail = bake(Feed(path), day, start, start + 600, route_types=[2], log=lambda *_: None)
         self.assertEqual({tr["route"] for tr in only_s["trips"]}, {"R"})
         self.assertEqual({tr["route"] for tr in all_rail["trips"]}, {"R", "T"})
+
+
+class TooFastTest(unittest.TestCase):
+    def test_flags_only_impossible_hops(self):
+        from transit_reels.bake import _too_fast
+        d = np.array([0.0, 600.0, 20600.0])          # meters along the shape
+        arr = np.array([0.0, 60.0, 187.0])            # 20 km in about two minutes: a misplaced stop
+        self.assertTrue(_too_fast(d, arr, arr.copy(), 3))
+        ok = np.array([0.0, 60.0, 1500.0])            # 20 km in 24 min: a believable bus
+        self.assertFalse(_too_fast(d, ok, ok.copy(), 3))
+        rounded = np.array([0.0, 0.0, 600.0])          # 0.6 km "in 0 s": times rounded to the minute
+        self.assertFalse(_too_fast(d, rounded, rounded.copy(), 3))
