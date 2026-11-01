@@ -1,0 +1,28 @@
+title = "Kuala Lumpur"
+subtitle = "LRT, MRT, monorail and Rapid KL bus"
+
+# data.gov.my: "All GTFS Static feeds are licensed under CC BY 4.0"
+# (https://developer.data.gov.my/realtime-api/gtfs-static, read 31 Oct 2026).
+# The rail feed gives headways (frequencies.txt), expanded into one train per headway.
+# Not included: KTM Komuter (the ktmb feed has no shapes, so its trains could only move in
+# straight lines between stations).
+
+[[feeds]]
+url = "https://api.data.gov.my/gtfs-static/prasarana?category=rapid-rail-kl"
+mirror = "https://files.mobilitydatabase.org/tld-6771/latest.zip"
+attribution = "Timetables: Prasarana Malaysia via data.gov.my, CC BY 4.0"
+license = "https://developer.data.gov.my/realtime-api/gtfs-static"
+
+[[feeds]]   # Rapid KL buses
+url = "https://api.data.gov.my/gtfs-static/prasarana?category=rapid-bus-kl"
+mirror = "https://files.mobilitydatabase.org/tld-6767/latest.zip"
+license = "https://developer.data.gov.my/realtime-api/gtfs-static"
+
+[[feeds]]   # MRT feeder buses
+url = "https://api.data.gov.my/gtfs-static/prasarana?category=rapid-bus-mrtfeeder"
+mirror = "https://files.mobilitydatabase.org/tld-6769/latest.zip"
+license = "https://developer.data.gov.my/realtime-api/gtfs-static"
+
+[map]
+center = [101.66, 3.12]
+width_km = 34

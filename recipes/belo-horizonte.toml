@@ -1,0 +1,21 @@
+title = "Belo Horizonte"
+subtitle = "every city bus"
+
+# PBH open data: "Creative Commons Attribution"
+# (https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional, read 31 Oct 2026).
+# Not included: the Metrô BH line (run by a separate operator, not in these feeds).
+
+[[feeds]]   # the conventional system
+url = "https://ckan.pbh.gov.br/dataset/77764a7e-63fc-4111-ace3-fb7d3037953a/resource/f0fa78dc-74c3-49fa-8971-c310a76a07fa/download/gtfsfiles.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-9/latest.zip"
+attribution = "Timetables: Prefeitura de Belo Horizonte (SUMOB), CC BY"
+license = "https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional"
+
+[[feeds]]   # the supplementary system
+url = "https://ckan.pbh.gov.br/dataset/af0c47bb-5a82-4ae1-874f-e45dea1397ff/resource/b2a9341e-4471-45cc-a8c0-11be805590bc/download/gtfsfiles.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-687/latest.zip"
+license = "https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar"
+
+[map]
+center = [-43.95, -19.875]
+width_km = 24
