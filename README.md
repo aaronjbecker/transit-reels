@@ -76,14 +76,14 @@ The video lands in `work/boston/boston.mp4`. Or with pip: `pip install -e .`, th
 ## Your city
 
 ```bash
-uv run transit-reels find vienna               # search ~2,900 active GTFS feeds
+uv run transit-reels find lyon                 # search ~2,900 active GTFS feeds
 uv run transit-reels inspect <feed url>     # modes, dates covered, trips per day
-cp recipes/example.toml recipes/vienna.toml    # set title, feed url, attribution
-uv run transit-reels still recipes/vienna.toml # one frame, to check the framing
-uv run transit-reels render recipes/vienna.toml
-uv run transit-reels render recipes/vienna.toml --format horizontal   # 16:9 for X, LinkedIn
-uv run transit-reels web recipes/vienna.toml   # the interactive page, one HTML file
-uv run transit-reels stats recipes/vienna.toml # runs, paths, vehicles moving: caption numbers
+cp recipes/example.toml recipes/lyon.toml      # set title, feed url, attribution
+uv run transit-reels still recipes/lyon.toml   # one frame, to check the framing
+uv run transit-reels render recipes/lyon.toml
+uv run transit-reels render recipes/lyon.toml --format horizontal   # 16:9 for X, LinkedIn
+uv run transit-reels web recipes/lyon.toml     # the interactive page, one HTML file
+uv run transit-reels stats recipes/lyon.toml   # runs, paths, vehicles moving: caption numbers
 ```
 
 A reel shows the morning peak, 08:00 to 08:20 in ten seconds: slow enough to follow a single
@@ -141,7 +141,7 @@ Everything shown comes from the published timetable. It is not live positions.
 
 ## Put it on a website
 
-`uv run transit-reels web recipes/vienna.toml --embed <folder>` writes the player as plain
+`uv run transit-reels web recipes/lyon.toml --embed <folder>` writes the player as plain
 files (one JavaScript module, no build step) to drop into any site, SvelteKit included.
 [docs/embed.md](docs/embed.md) has the snippet and the options.
 

@@ -1,21 +1,21 @@
 # Put the interactive map on a website
 
 ```bash
-uv run transit-reels web recipes/vienna.toml --embed site/static/transit/vienna
+uv run transit-reels web recipes/lyon.toml --embed site/static/transit/lyon
 ```
 
 writes `player.js` (plain JavaScript, no build step; it loads MapLibre GL from unpkg for the
-base map), `vienna.json` and
-`vienna-plate.jpg`, plus an `index.html` that shows how to mount it. Serve the folder (the
+base map), `lyon.json` and
+`lyon-plate.jpg`, plus an `index.html` that shows how to mount it. Serve the folder (the
 JSON compresses well, so let the server gzip it) and mount the player in any element that
 has a size:
 
 ```html
 <div id="map" style="height: 80vh"></div>
 <script type="module">
-  import { mount } from "/transit/vienna/player.js";
-  mount(document.getElementById("map"), "/transit/vienna/vienna.json",
-        { plate: "/transit/vienna/vienna-plate.jpg" });
+  import { mount } from "/transit/lyon/player.js";
+  mount(document.getElementById("map"), "/transit/lyon/lyon.json",
+        { plate: "/transit/lyon/lyon-plate.jpg" });
 </script>
 ```
 
@@ -25,8 +25,8 @@ in the browser:
 ```svelte
 <script>
   import { onMount } from "svelte";
-  export let src = "/transit/vienna";   // the --embed folder, as served
-  export let name = "vienna";
+  export let src = "/transit/lyon";   // the --embed folder, as served
+  export let name = "lyon";
   let el;
   onMount(() => {
     let player;
