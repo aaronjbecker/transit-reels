@@ -170,3 +170,21 @@ class SimplifyTest(unittest.TestCase):
         # Same straight line, but the vehicle waits at x=1 (a stop): that point stays.
         t = np.array([0, 10, 40, 50, 60, 70], float)
         self.assertIn(1, simplify(x, y, t).tolist())
+
+
+class ExtendedRouteTypeTest(unittest.TestCase):
+    """route_types can name a feed's extended codes: keep 109 (suburban rail), drop 106 (regional)."""
+
+    def test_keep_suburban_drop_regional(self):
+        tables = dict(TABLES, **{"routes.txt": "route_id,agency_id,route_short_name,route_type,route_color\n"
+                                               "R,A,S1,109,\nT,A,RE1,106,FF0000\n"})
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "feed.zip"
+            with zipfile.ZipFile(path, "w") as z:
+                for name, text in tables.items():
+                    z.writestr(name, text)
+            day, start = dt.date(2026, 11, 4), 8 * 3600
+            only_s = bake(Feed(path), day, start, start + 600, route_types=[109], log=lambda *_: None)
+            all_rail = bake(Feed(path), day, start, start + 600, route_types=[2], log=lambda *_: None)
+        self.assertEqual({tr["route"] for tr in only_s["trips"]}, {"R"})
+        self.assertEqual({tr["route"] for tr in all_rail["trips"]}, {"R", "T"})
