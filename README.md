@@ -77,7 +77,7 @@ The video lands in `work/boston/boston.mp4`. Or with pip: `pip install -e .`, th
 
 ```bash
 uv run transit-reels find lyon                 # search ~2,900 active GTFS feeds
-uv run transit-reels inspect <feed url>     # modes, dates covered, trips per day
+uv run transit-reels inspect <feed url>       # modes, dates covered, trips per day
 cp recipes/example.toml recipes/lyon.toml      # set title, feed url, attribution
 uv run transit-reels still recipes/lyon.toml   # one frame, to check the framing
 uv run transit-reels render recipes/lyon.toml
