@@ -36,7 +36,7 @@ numpy and Pillow, plus a bundled ffmpeg.
 
 | Paris | New York | Seattle |
 |---|---|---|
-| 11,205 runs in 20 minutes, 841 of them métro | 5,845 runs, nine MTA feeds merged | 1,486 runs, 36 of them ferries |
+| 6,830 runs in the frame in 20 minutes | 4,672 runs, nine MTA feeds merged | 1,218 runs, ferries included |
 
 Every reel above was made from a recipe in [`recipes/`](recipes), so you can make it again
 exactly.
@@ -97,9 +97,21 @@ Until then the tool uses the keyless Mobility Database mirror.
 
 ## Several cities in one reel
 
+<p align="center">
+  <img src="docs/media/grid-us-big.webp" width="100%"
+       alt="Nine big US cities at 8 a.m. in a three-by-three grid, New York first, each map 43 km wide, with each city's vehicle count">
+</p>
+
 A recipe with `[grid]` puts up to nine cities in a regular grid: the same local hours of each,
-on one clock, at one ground scale. Its `cities` list names recipes you already have. See
-[`recipes/nine-cities.toml`](recipes/nine-cities.toml).
+on one clock, at one ground scale, so a bigger network looks bigger. The busiest map comes
+first. Its `cities` list names recipes you already have. The grid recipes run forty minutes in
+twenty seconds, time enough to look from one city to the next. See
+[`recipes/nine-cities.toml`](recipes/nine-cities.toml), or any `recipes/grid-*.toml`.
+
+<p align="center">
+  <img src="docs/media/grid-europe.webp" width="100%"
+       alt="Three vertical grid reels side by side: Central Europe, France and the Nordics at 8 a.m.">
+</p>
 
 ```bash
 uv run transit-reels render recipes/nine-cities.toml
