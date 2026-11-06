@@ -1,0 +1,9 @@
+title = "Central Europe, 8 a.m."
+
+[grid]
+cities = ["warsaw", "budapest", "prague", "vienna", "krakow", "bratislava"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

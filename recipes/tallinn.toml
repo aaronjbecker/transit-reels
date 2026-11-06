@@ -1,0 +1,16 @@
+title = "Tallinn"
+subtitle = "tram and bus"
+
+# Estonian public transport open data (https://www.agri.ee/regionaalareng-uhistransport/
+# uhistransport-ja-reisimine/uhistranspordiregistri-avaandmed, read 4 Nov 2026): "Avaandmed on
+# kasutamiseks vabalt kättesaadavad kõigile huvilistele" (free for anyone to use); no license named.
+
+[feed]
+url = "https://eu-gtfs.remix.com/tallinn.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3047/latest.zip"
+attribution = "Timetable: Tallinna Linnatransport / Estonian open data"
+license = "https://www.agri.ee/regionaalareng-uhistransport/uhistransport-ja-reisimine/uhistranspordiregistri-avaandmed"
+
+[map]
+center = [24.75, 59.435]
+width_km = 12

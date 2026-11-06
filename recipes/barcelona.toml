@@ -1,0 +1,35 @@
+title = "Barcelona"
+subtitle = "metro, tram, train and bus"
+
+# TMB's own URL carries an app key, so the Mobility Database mirror is used for all of them.
+[[feeds]]
+url = "https://files.mobilitydatabase.org/mdb-2359/latest.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2359/latest.zip"
+attribution = "Timetable: Transports Metropolitans de Barcelona (TMB), FGC, TRAM"
+license = "https://developer.tmb.cat/"
+
+[[feeds]]
+url = "https://www.fgc.cat/google/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1856/latest.zip"
+license = "https://dadesobertes.fgc.cat/explore/?q=gtfs_zip"
+
+[[feeds]]
+url = "https://opendata.tram.cat/GTFS/zip/TBX.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1003/latest.zip"
+license = "https://opendata.tram.cat/"
+
+[[feeds]]
+url = "https://opendata.tram.cat/GTFS/zip/TBS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1004/latest.zip"
+license = "https://opendata.tram.cat/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [2.16, 41.40]
+width_km = 16
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]

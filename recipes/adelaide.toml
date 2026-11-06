@@ -1,0 +1,16 @@
+title = "Adelaide"
+subtitle = "train, tram and bus"
+
+# Adelaide Metro General Transit Feed, Government of South Australia on data.sa.gov.au,
+# Creative Commons Attribution 4.0 (https://data.sa.gov.au/data/dataset/adelaide-metro-gtfs,
+# license field read 2 Nov 2026).
+
+[[feeds]]
+url = "https://gtfs.adelaidemetro.com.au/v1/static/latest/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-660/latest.zip"
+attribution = "Timetables: Adelaide Metro, Government of South Australia, CC BY 4.0"
+license = "https://creativecommons.org/licenses/by/4.0/"
+
+[map]
+center = [138.62, -34.90]
+width_km = 44

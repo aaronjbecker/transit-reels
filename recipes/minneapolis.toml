@@ -1,0 +1,23 @@
+title = "Minneapolis"
+subtitle = "light rail, Northstar and bus"
+
+# No license terms found for the Metro Transit GTFS feed; treated as allowed under the batch
+# license rule.
+
+[[feeds]]
+url = "https://svc.metrotransit.org/mtgtfs/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-205/latest.zip"
+attribution = "Timetable: Metro Transit (Minnesota), not endorsed by Metro Transit"
+license = "https://www.metrotransit.org/data-and-publications"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-93.25, 44.97]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

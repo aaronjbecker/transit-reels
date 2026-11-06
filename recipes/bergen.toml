@@ -1,0 +1,19 @@
+title = "Bergen"
+subtitle = "Bybanen light rail and bus"
+
+# Entur national timetable (all of Norway), NLOD (https://developer.entur.org/stops-and-timetable-data). Trains left out: the national feed draws them in straight lines.
+
+[feed]
+url = "https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_norway-aggregated-gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1078/latest.zip"
+attribution = "Timetable: Entur AS and Norwegian operators, NLOD"
+license = "https://data.norge.no/nlod/en/2.0"
+route_types = [0, 3]
+
+[map]
+center = [5.33, 60.35]
+width_km = 20
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

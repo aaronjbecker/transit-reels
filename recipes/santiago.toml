@@ -1,0 +1,18 @@
+title = "Santiago"
+subtitle = "metro, tram and bus"
+
+# DTPM current-GTFS page; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://www.dtpm.cl/descargas/gtfs/GTFS_20260704.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3357/latest.zip"
+attribution = "Timetable: DTPM, Red Movilidad"
+license = "https://www.dtpm.cl/index.php/gtfs-vigente"
+
+[map]
+center = [-70.66, -33.46]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

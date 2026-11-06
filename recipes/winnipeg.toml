@@ -1,0 +1,14 @@
+title = "Winnipeg"
+subtitle = "bus"
+
+# Winnipeg Transit open data; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "http://gtfs.winnipegtransit.com/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-717/latest.zip"
+attribution = "Timetable: Winnipeg Transit"
+license = "https://winnipegtransit.com/en/developers"
+
+[map]
+center = [-97.14, 49.88]
+width_km = 20

@@ -1,0 +1,12 @@
+title = "Marseille"
+subtitle = "metro, tram, ferry and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/7eef6ec9-9ebb-44f2-becb-2efc522522d6"
+mirror = "https://files.mobilitydatabase.org/tdg-39589/latest.zip"
+attribution = "Timetable: Métropole d'Aix-Marseille-Provence (RTM), Licence Ouverte 2.0"
+license = "https://transport.data.gouv.fr/datasets/reseaux-de-transports-en-commun-de-la-metropole-daix-marseille-provence-et-des-bouches-du-rhone"
+
+[map]
+center = [5.40, 43.30]
+width_km = 18

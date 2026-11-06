@@ -1,0 +1,9 @@
+title = "Australia and New Zealand, 8 a.m."
+
+[grid]
+cities = ["sydney", "melbourne", "brisbane", "perth", "adelaide", "auckland"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

@@ -1,0 +1,20 @@
+title = "Nice"
+subtitle = "tram and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/f5678ab2-c863-4b48-ba1f-9021c7d97634"
+mirror = "https://files.mobilitydatabase.org/tdg-83178/latest.zip"
+attribution = "Timetable: Métropole Nice Côte d'Azur (Lignes d'Azur), Licence Ouverte 2.0"
+license = "https://transport.data.gouv.fr/datasets/donnees-statiques-et-dynamiques-du-reseau-de-transport-lignes-dazur"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [7.265, 43.70]
+width_km = 14
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

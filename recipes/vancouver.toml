@@ -1,0 +1,19 @@
+title = "Vancouver"
+subtitle = "SkyTrain, commuter rail, SeaBus and bus"
+
+# TransLink developer terms (https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/gtfs/gtfs-data,
+# read 2 Nov 2026): a license to use, reproduce and redistribute the Data; the legend "Route and
+# arrival data used in this product or service is provided by permission of TransLink." must be
+# displayed prominently, with "TransLink assumes no responsibility for the accuracy or currency
+# of the Data used in this product or service." TransLink's name and marks may not be used
+# beyond that legend. The terms also ask the user to say whether use is commercial or not.
+
+[[feeds]]
+url = "https://gtfs-static.translink.ca/gtfs/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-696/latest.zip"
+attribution = "Route and arrival data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service."
+license = "https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/gtfs/gtfs-data"
+
+[map]
+center = [-123.00, 49.20]
+width_km = 31

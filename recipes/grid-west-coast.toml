@@ -1,0 +1,9 @@
+title = "West Coast, 8 a.m."
+
+[grid]
+cities = ["los-angeles", "vancouver", "seattle", "san-diego", "portland", "san-jose"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

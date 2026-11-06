@@ -1,0 +1,20 @@
+title = "Copenhagen"
+subtitle = "metro, S-train, light rail, harbor bus and bus"
+
+# Rejseplanen national GTFS (all of Denmark: Movia, DSB S-tog, Metroselskabet, Hovedstadens
+# Letbane and others), framed on Copenhagen. No license text found on the download page
+# (https://www.rejseplanen.dk/labs); no bar on this use known, so allowed under the batch rule.
+
+[feed]
+url = "https://www.rejseplanen.info/labs/GTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1292/latest.zip"
+attribution = "Timetable: Rejseplanen and Danish operators (Movia, DSB, Metroselskabet)"
+license = "https://www.rejseplanen.dk/labs"
+
+[map]
+center = [12.57, 55.68]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

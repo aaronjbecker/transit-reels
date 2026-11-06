@@ -39,6 +39,7 @@ then `transit-reels ...`.
 | `src/transit_reels/geo.py` | Web Mercator framing |
 | `src/transit_reels/water.py` | sea, lakes and rivers from OpenStreetMap (Overpass) |
 | `src/transit_reels/render.py` | the map plate, the dots, the words, the ffmpeg pipe |
+| `src/transit_reels/grid.py` | up to nine cities in one reel: the page layout, the shared clock |
 | `src/transit_reels/web.py` | the interactive page's data, as one HTML file or (`--embed`) files for a site |
 | `src/transit_reels/player.js` | the interactive player: plain JavaScript, no build step; MapLibre GL (from unpkg) draws the OpenFreeMap base map |
 | `recipes/` | one TOML per city; `example.toml` documents every key |

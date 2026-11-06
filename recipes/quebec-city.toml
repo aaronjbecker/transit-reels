@@ -1,0 +1,14 @@
+title = "Quebec City"
+subtitle = "bus"
+
+# Données Québec dataset page: license Attribution (CC-BY 4.0), https://www.donneesquebec.ca/licence/#cc-by (read 5 Nov 2026).
+
+[feed]
+url = "https://cdn.rtcquebec.ca/Site_Internet/DonneesOuvertes/googletransit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-757/latest.zip"
+attribution = "Timetable: Réseau de transport de la Capitale (RTC), CC BY 4.0"
+license = "https://www.donneesquebec.ca/recherche/dataset/rtc-gtfs-arrets-et-les-parcours"
+
+[map]
+center = [-71.30, 46.82]
+width_km = 24

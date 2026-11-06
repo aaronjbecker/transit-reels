@@ -1,0 +1,20 @@
+title = "San Diego"
+subtitle = "trolley, bus and ferry"
+
+# MTS terms (https://www.sdmts.com/business-center-developers/terms-and-conditions, read 2 Nov
+# 2026): "non-exclusive, limited and revocable rights to use, reproduce, and redistribute" the
+# GTFS data; no credit wording; MTS trademarks and copyrighted materials may not be used.
+
+[[feeds]]
+url = "https://www.sdmts.com/google_transit_files/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-13/latest.zip"
+attribution = "Timetables: San Diego Metropolitan Transit System GTFS, not endorsed by MTS"
+license = "https://www.sdmts.com/business-center-developers/terms-and-conditions"
+
+[map]
+center = [-117.07, 32.78]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

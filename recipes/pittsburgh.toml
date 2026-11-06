@@ -1,0 +1,25 @@
+title = "Pittsburgh"
+subtitle = "light rail, busways and bus"
+
+# PRT developer license (https://rideprt.org/policies/developer-license-agreement/): use and
+# reproduce the data accurately, no sublicense; derivative notice "Reproduced with
+# permission granted by Pittsburgh Regional Transit (PRT)". Nothing forbids a video. The
+# credit line below carries the notice.
+
+[[feeds]]
+url = "https://www.rideprt.org/developerresources/GTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-409/latest.zip"
+attribution = "Reproduced with permission granted by Pittsburgh Regional Transit (PRT), not endorsed by PRT"
+license = "https://rideprt.org/policies/developer-license-agreement/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-79.98, 40.44]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

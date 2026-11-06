@@ -1,0 +1,18 @@
+title = "Wellington"
+subtitle = "train, bus and ferry"
+
+# Metlink GTFS page; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://static.opendata.metlink.org.nz/v1/gtfs/full.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1132/latest.zip"
+attribution = "Timetable: Metlink, Greater Wellington Regional Council"
+license = "http://www.metlink.org.nz/customer-services/general-transit-feed-specification/"
+
+[map]
+center = [174.8, -41.25]
+width_km = 28
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

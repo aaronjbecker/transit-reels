@@ -1,0 +1,21 @@
+title = "Gothenburg"
+subtitle = "tram, ferry, train and bus"
+
+# Trafiklab regional GTFS (Samtrafiken); license page https://www.trafiklab.se/api/gtfs-datasets/gtfs-regional/#licence lists CC0 (to confirm).
+
+[feed]
+url = "https://opendata.samtrafiken.se/gtfs/vt/vt.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3248/latest.zip"
+key = "trafiklab"
+key_param = "key"
+signup = "https://developer.trafiklab.se/register"
+attribution = "Timetable: Västtrafik, via Trafiklab"
+license = "https://www.trafiklab.se/api/gtfs-datasets/gtfs-regional/#licence"
+
+[map]
+center = [11.97, 57.71]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

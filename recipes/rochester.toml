@@ -1,0 +1,19 @@
+title = "Rochester"
+subtitle = "RTS bus"
+
+# RGRTA's GTFS page lists the feed with no license; treated as allowed under the batch license
+# rule (https://scheduledata.rgrta.com/).
+
+[feed]
+url = "http://scheduledata.rgrta.com/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-533/latest.zip"
+attribution = "Timetable: Regional Transit Service (RGRTA), not endorsed by RGRTA"
+license = "https://scheduledata.rgrta.com/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-77.61, 43.16]
+width_km = 20

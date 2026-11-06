@@ -111,7 +111,7 @@ def data(baked: dict, frame: Frame, recipe: dict, words: dict, views: dict | Non
         "routes": out_routes, "agencies": agencies, "headsigns": baked["headsigns"],
         "stops": [[s[1], int(round(x * 10)), int(round(y * 10))] for s, x, y in zip(baked["stops"], sx, sy)],
         "trips": trips, "net": net,
-        "style": {**{k: style[k] for k in ("outline", "outline_width", "outline_alpha", "glow_max", "line_width", "line_alpha",
+        "style": {**{k: style[k] for k in ("outline", "outline_width", "outline_alpha", "glow_max", "line_width", "line_alpha", "line_glow_sigma", "line_glow_gain",
                                           "thin_width", "thin_alpha", "network_width", "network_alpha")},
                   **{k: hexc(rgb(style[k])) for k in ("land", "water", "network")},
                   "dot": style["dot"], "line_dot": style["line_dot"]},

@@ -1,0 +1,20 @@
+title = "Turin"
+subtitle = "metro, tram, funicular and bus"
+
+[[feeds]]
+url = "https://www.gtt.to.it/open_data/gtt_gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2687/latest.zip"
+attribution = "Timetable: Gruppo Torinese Trasporti (GTT)"
+license = "https://www.gtt.to.it/gtt_gtfs_license.html"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [7.67, 45.07]
+width_km = 16
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

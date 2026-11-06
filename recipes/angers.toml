@@ -1,0 +1,20 @@
+title = "Angers"
+subtitle = "tram and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/32f30b64-33f7-43bb-9b6f-34c21c2f83a3"
+mirror = "https://files.mobilitydatabase.org/tdg-80036/latest.zip"
+attribution = "Timetable: Angers Loire Métropole (Irigo), ODbL"
+license = "https://transport.data.gouv.fr/datasets/angers-loire-metropole-reseau-irigo-gtfs-gtfs-rt-siri"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-0.555, 47.47]
+width_km = 14
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

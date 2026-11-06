@@ -1,0 +1,12 @@
+title = "Rennes"
+subtitle = "metro and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/0644f537-575e-4cce-9570-06165d6f3b27"
+mirror = "https://files.mobilitydatabase.org/tdg-83281/latest.zip"
+attribution = "Timetable: STAR / Rennes Métropole, ODbL"
+license = "https://transport.data.gouv.fr/datasets/versions-des-horaires-theoriques-des-lignes-de-bus-et-de-metro-du-reseau-star-dans-les-formats-gtfs-et-netex-ainsi-que-les-urls-dacces-au-gtfs-rt-1"
+
+[map]
+center = [-1.67, 48.11]
+width_km = 10

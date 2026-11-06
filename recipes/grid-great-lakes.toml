@@ -1,0 +1,9 @@
+title = "Great Lakes, 8 a.m."
+
+[grid]
+cities = ["toronto", "chicago", "buffalo", "detroit", "milwaukee", "cleveland"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

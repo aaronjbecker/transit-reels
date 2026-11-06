@@ -1,0 +1,18 @@
+title = "Montreal"
+subtitle = "métro and bus"
+
+# STM developer page (https://www.stm.info/fr/a-propos/developpeurs, read 2 Nov 2026, French
+# only): "L'utilisation des données STM est offerte sous licence Creative Commons - Attribution
+# 4.0 CC-BY. Cette licence permet de distribuer, de remixer, d'arranger et d'adapter les
+# données en citant la source." The STM feed covers the métro and STM buses only.
+# Not included: the REM, exo commuter rail and other agencies' buses.
+
+[[feeds]]
+url = "https://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2126/latest.zip"
+attribution = "Timetables: Société de transport de Montréal (STM), CC BY 4.0"
+license = "https://www.stm.info/fr/a-propos/developpeurs"
+
+[map]
+center = [-73.68, 45.53]
+width_km = 44

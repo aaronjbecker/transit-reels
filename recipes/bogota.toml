@@ -1,0 +1,14 @@
+title = "Bogota"
+subtitle = "bus and cable car"
+
+# SIMUR GTFS page; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://storage.googleapis.com/gtfs-estaticos/GTFS-2026-04-29.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3358/latest.zip"
+attribution = "Timetable: SIMUR, Secretaría Distrital de Movilidad Bogotá"
+license = "http://www.simur.gov.co/gtfs"
+
+[map]
+center = [-74.08, 4.67]
+width_km = 34

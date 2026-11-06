@@ -1,0 +1,23 @@
+title = "Austin"
+subtitle = "MetroRail and bus"
+
+# Capital Metro MetroLabs terms: use, reproduce and redistribute the data; CMTA marks not to
+# be used.
+
+[[feeds]]
+url = "https://data.texas.gov/download/r4v4-vz24/application/zip"
+mirror = "https://files.mobilitydatabase.org/mdb-150/latest.zip"
+attribution = "Timetable: Capital Metro, not endorsed by Capital Metro"
+license = "https://www.capmetro.org/metrolabs/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-97.74, 30.29]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

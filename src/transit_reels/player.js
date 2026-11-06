@@ -270,6 +270,12 @@ export async function mount(el, data, opts = {}) {
     if (!netPaths) buildNet();
     cx.lineJoin = cx.lineCap = "round";
     for (const g of netPaths) {
+      if (g.tier && S.line_glow_gain > 0) {  // a soft glow of the line's color, widest first
+        cx.strokeStyle = g.color;
+        for (const [k, ga] of [[2.2, 0.05], [1.3, 0.09], [0.6, 0.14]]) {
+          cx.globalAlpha = ga * S.line_glow_gain; cx.lineWidth = Math.max(2 * k * S.line_glow_sigma * u / z, 0.6 / view.s); cx.stroke(g.path);
+        }
+      }
       const [wd, a] = g.tier === 2 ? [S.line_width, S.line_alpha] : g.tier === 1 ? [S.thin_width, S.thin_alpha] : [S.network_width, S.network_alpha];
       cx.strokeStyle = g.color; cx.globalAlpha = a; cx.lineWidth = Math.max(wd * u / z, 0.6 / view.s); cx.stroke(g.path);
     }
@@ -351,8 +357,8 @@ export async function mount(el, data, opts = {}) {
       cx.globalAlpha = pass ? 1 : (dim ? 0.28 : 1);
       if (!dim || pass) {
         cx.globalCompositeOperation = "lighten";
-        for (const [i, x, y] of list) { const tr = trips[i], sp = tr.isLine ? S.line_dot : S.dot; if (!(sp.glow_gain > 0)) continue;
-          cx.globalAlpha = Math.min(S.glow_max, sp.glow_gain * 0.5); cx.fillStyle = routes[tr.r].dot;
+        for (const [i, x, y] of list) { const tr = trips[i], sp = routes[tr.r].tier ? S.line_dot : S.dot; if (!(sp.glow_gain > 0)) continue;
+          cx.globalAlpha = Math.min(sp.glow_max ?? S.glow_max, sp.glow_gain * 0.5); cx.fillStyle = routes[tr.r].dot;
           cx.beginPath(); cx.arc(x, y, sp.glow_sigma * u / z * 1.5, 0, 7); cx.fill(); }
         cx.globalCompositeOperation = "source-over"; cx.globalAlpha = pass ? 1 : (dim ? 0.28 : 1);
       }

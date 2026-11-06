@@ -1,0 +1,23 @@
+title = "San Jose"
+subtitle = "VTA light rail and bus"
+
+# VTA's developer page lists the feed with no license; treated as allowed under the batch
+# license rule (https://www.vta.org/business-center/developer-resources).
+
+[feed]
+url = "https://gtfs.vta.org/gtfs_vta.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-57/latest.zip"
+attribution = "Timetable: Santa Clara Valley Transportation Authority (VTA), not endorsed by VTA"
+license = "https://www.vta.org/business-center/developer-resources"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-121.89, 37.34]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

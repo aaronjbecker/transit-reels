@@ -1,0 +1,23 @@
+title = "Cleveland"
+subtitle = "rapid transit and bus"
+
+# GCRTA developer terms (http://www.riderta.com/developers): credit GCRTA as the data
+# provider; no GCRTA logos.
+
+[[feeds]]
+url = "https://www.riderta.com/sites/default/files/gtfs/latest/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-406/latest.zip"
+attribution = "Timetable: Greater Cleveland Regional Transit Authority (GCRTA), not endorsed by GCRTA"
+license = "http://www.riderta.com/developers"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-81.68, 41.49]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

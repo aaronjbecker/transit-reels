@@ -1,0 +1,18 @@
+title = "Ottawa"
+subtitle = "O-Train and bus"
+
+# OC Transpo developer terms (to confirm); terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://oct-gtfs-emasagcnfmcgeham.z01.azurefd.net/public-access/GTFSExport.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2154/latest.zip"
+attribution = "Timetable: OC Transpo, City of Ottawa"
+license = "https://www.octranspo.com/en/plan-your-trip/travel-tools/developers/"
+
+[map]
+center = [-75.69, 45.41]
+width_km = 26
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

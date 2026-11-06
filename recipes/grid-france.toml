@@ -1,0 +1,10 @@
+# France, nine cities: one hour, one date, one scale.
+title = "France, 8 a.m."
+
+[grid]
+cities = ["paris", "bordeaux", "toulouse", "marseille", "rennes", "grenoble", "nice", "angers", "dijon"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

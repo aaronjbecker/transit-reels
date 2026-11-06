@@ -1,0 +1,28 @@
+title = "Houston"
+subtitle = "light rail and bus"
+
+# Houston METRO Transit Data Files, Data Use Agreement (updated May 2025,
+# https://www.ridemetro.org/about/news-media/digital-assets, #termsofuse): "a limited,
+# worldwide, non-exclusive, revocable license to reproduce, redistribute, incorporate for
+# personal or commercial use, and publicly display the Data". The Data must be presented
+# with the notice below. The agency mark "METRO" is not used on screen, so its asterisk
+# notice is not needed; no use implying endorsement.
+
+[feed]
+url = "https://metro.resourcespace.com/pages/download.php?ref=4835&ext=zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2060/latest.zip"
+attribution = "Data is provided by permission of The Metropolitan Transit Authority of Harris County, Texas"
+license = "https://www.ridemetro.org/about/news-media/digital-assets"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-95.40, 29.76]
+width_km = 38
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []
+mode_colors = { "0" = "#ff6b5e" }

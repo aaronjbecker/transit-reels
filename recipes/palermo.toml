@@ -1,0 +1,20 @@
+title = "Palermo"
+subtitle = "tram and bus"
+
+[[feeds]]
+url = "https://opendata.comune.palermo.it/js/server/uploads/dataset/gtfs/amat_gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2373/latest.zip"
+attribution = "Timetable: AMAT Palermo, Comune di Palermo open data"
+license = "https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1303"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [13.36, 38.12]
+width_km = 14
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

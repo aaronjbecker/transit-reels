@@ -1,0 +1,22 @@
+title = "Sacramento"
+subtitle = "light rail and bus"
+
+# SacRT GTFS page (https://www.sacrt.com/gtfs/): data free to use; nothing forbids a video.
+
+[[feeds]]
+url = "https://apps.sacrt.com/gtfs/srtd/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2137/latest.zip"
+attribution = "Timetable: Sacramento Regional Transit (SacRT), not endorsed by SacRT"
+license = "https://www.sacrt.com/gtfs/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-121.46, 38.57]
+width_km = 26
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

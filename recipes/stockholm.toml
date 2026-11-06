@@ -1,0 +1,21 @@
+title = "Stockholm"
+subtitle = "metro, tram, train, ferry and bus"
+
+# Trafiklab regional GTFS (Samtrafiken); license page https://www.trafiklab.se/api/gtfs-datasets/gtfs-regional/#licence lists CC0 (to confirm).
+
+[feed]
+url = "https://opendata.samtrafiken.se/gtfs/sl/sl.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3237/latest.zip"
+key = "trafiklab"
+key_param = "key"
+signup = "https://developer.trafiklab.se/register"
+attribution = "Timetable: Storstockholms Lokaltrafik (SL), via Trafiklab"
+license = "https://www.trafiklab.se/api/gtfs-datasets/gtfs-regional/#licence"
+
+[map]
+center = [18.05, 59.33]
+width_km = 28
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

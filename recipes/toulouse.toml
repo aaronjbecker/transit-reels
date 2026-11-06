@@ -1,0 +1,18 @@
+title = "Toulouse"
+subtitle = "metro, tram, cable car and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/64318177-f5b5-4144-a6be-2d0f22d26c77"
+mirror = "https://files.mobilitydatabase.org/tdg-81678/latest.zip"
+attribution = "Timetable: Tisséo / Toulouse Métropole, ODbL"
+license = "https://transport.data.gouv.fr/datasets/tisseo-reseau-transport-urbain-toulousain"
+
+[map]
+center = [1.44, 43.60]
+width_km = 15
+
+[style]
+# Tisséo's tram line is a dark blue that vanishes on the dark map: a light blue, firmer line.
+mode_colors = { "0" = "#8ec9ff" }
+thin_width = 2.2
+thin_alpha = 0.7

@@ -1,0 +1,26 @@
+title = "Philadelphia"
+subtitle = "subway, trolley, bus and regional rail"
+
+# SEPTA developer terms (https://www3.septa.org/developer/, read 2 Nov 2026): "non-exclusive,
+# limited and revocable right to use, reproduce and redistribute" the Trip Planning Data; no
+# credit wording; SEPTA's trademarks and copyrighted materials may not be used commercially or
+# altered.
+
+[[feeds]]
+url = "https://www3.septa.org/developer/google_bus.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-502/latest.zip"
+attribution = "Timetables: SEPTA GTFS, not endorsed by SEPTA"
+license = "https://www3.septa.org/developer/"
+
+[[feeds]]
+url = "https://www3.septa.org/developer/google_rail.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-503/latest.zip"
+license = "https://www3.septa.org/developer/"
+
+[map]
+center = [-75.15, 39.98]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

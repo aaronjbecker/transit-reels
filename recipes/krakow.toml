@@ -1,0 +1,21 @@
+title = "Krakow"
+subtitle = "tram and bus"
+
+# ZTP Kraków (https://ztp.krakow.pl) publishes the GTFS under its Open Data tab; the licence
+# text was not found (the catalog points at the homepage only). Nothing found forbids this use.
+# Mobilis (suburban) and Koleje Małopolskie are not included.
+
+[[feeds]]   # trams
+url = "https://gtfs.ztp.krakow.pl/GTFS_KRK_T.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1270/latest.zip"
+attribution = "Timetable: Zarząd Transportu Publicznego w Krakowie (ZTP)"
+license = "https://ztp.krakow.pl"
+
+[[feeds]]   # buses
+url = "https://gtfs.ztp.krakow.pl/GTFS_KRK_A.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1326/latest.zip"
+license = "https://ztp.krakow.pl"
+
+[map]
+center = [19.94, 50.06]
+width_km = 12

@@ -1,0 +1,12 @@
+title = "Providence"
+subtitle = "every RIPTA bus"
+
+[feed]
+url = "https://ripta.com/RIPTA-GTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-624/latest.zip"
+attribution = "Timetable: RIPTA GTFS, not endorsed by RIPTA"
+license = "https://www.ripta.com/mobile-applications"
+
+[map]
+center = [-71.42, 41.82]
+width_km = 20

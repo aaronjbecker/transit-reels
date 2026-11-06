@@ -1,0 +1,26 @@
+title = "Phoenix"
+subtitle = "light rail, streetcar and bus"
+
+# Valley Metro Bus Schedule, City of Phoenix Open Data, published by Public Transit, City of
+# Phoenix (https://www.phoenixopendata.com/dataset/valley-metro-bus-schedule). License: Open
+# Data Commons Attribution License (http://www.opendefinition.org/licenses/odc-by): use and
+# adapt with attribution; the dataset page states no further terms.
+
+[feed]
+url = "https://phoenixopendata.com/dataset/3eae9a4a-98b9-40c8-8df7-8c00c1756235/resource/28ccc0a5-49c8-495c-b91f-193de5ce2cb7/download/googletransit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-147/latest.zip"
+attribution = "Timetable: Valley Metro Bus Schedule, City of Phoenix Open Data (ODC-By)"
+license = "http://www.opendefinition.org/licenses/odc-by"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-112.03, 33.47]
+width_km = 50
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []
+mode_colors = { "0" = "#ff6b5e" }

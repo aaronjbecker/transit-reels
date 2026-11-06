@@ -1,0 +1,15 @@
+title = "Vilnius"
+subtitle = "trolleybus and bus"
+
+# Vilnius GTFS from stops.lt (Susisiekimo paslaugos). No terms found on stops.lt or the city
+# page (read 4 Nov 2026); nothing found that forbids this use.
+
+[feed]
+url = "http://www.stops.lt/vilnius/vilnius/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1044/latest.zip"
+attribution = "Timetable: Susisiekimo paslaugos (Vilnius) via stops.lt"
+license = "https://www.stops.lt/vilnius/"
+
+[map]
+center = [25.28, 54.69]
+width_km = 10

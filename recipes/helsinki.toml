@@ -1,0 +1,16 @@
+title = "Helsinki"
+subtitle = "metro, tram, train, ferry and bus"
+
+# HSL open data: "all data sets and APIs are CC BY 4.0" (https://www.hsl.fi/en/hsl/open-data,
+# read via search summary 2 Nov 2026). HSL asks users to cite the licensee and the delivery
+# date, e.g. "© HSL 2016".
+
+[feed]
+url = "http://dev.hsl.fi/gtfs/hsl.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-865/latest.zip"
+attribution = "Timetable: © HSL Helsinki Region Transport, CC BY 4.0"
+license = "https://www.hsl.fi/en/hsl/open-data"
+
+[map]
+center = [24.95, 60.26]
+width_km = 24

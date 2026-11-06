@@ -1,0 +1,14 @@
+title = "São Paulo"
+subtitle = "metro, train and bus"
+
+# SPTrans developer page; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026). Bus only (metro and CPTM not in this feed).
+
+[feed]
+url = "https://www.sptrans.com.br/umbraco/Surface/PerfilDesenvolvedor/BaixarGTFS?memberName=sptrans"
+mirror = "https://files.mobilitydatabase.org/mdb-8/latest.zip"
+attribution = "Timetable: SPTrans, Prefeitura de São Paulo"
+license = "https://www.sptrans.com.br/desenvolvedores/"
+
+[map]
+center = [-46.64, -23.58]
+width_km = 36

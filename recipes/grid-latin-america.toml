@@ -1,0 +1,9 @@
+title = "Latin America, 8 a.m."
+
+[grid]
+cities = ["sao-paulo", "santiago", "bogota", "rio-de-janeiro"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

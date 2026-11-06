@@ -1,0 +1,9 @@
+title = "Texas, 8 a.m."
+
+[grid]
+cities = ["houston", "dallas", "san-antonio", "austin"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

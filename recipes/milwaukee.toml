@@ -1,0 +1,23 @@
+title = "Milwaukee"
+subtitle = "bus"
+
+# MCTS terms ask for a not-sponsored line and the data dates; the credit line says not
+# endorsed. Mirror mdb-2127 is marked inactive; check its date.
+
+[[feeds]]
+url = "https://kamino.mcts.org/gtfs/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2127/latest.zip"
+attribution = "Timetable: Milwaukee County Transit System (MCTS), not endorsed by MCTS"
+license = "https://www.ridemcts.com/about-us/developers"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-87.95, 43.03]
+width_km = 26
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

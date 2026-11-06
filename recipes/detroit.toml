@@ -1,0 +1,33 @@
+title = "Detroit"
+subtitle = "QLine, People Mover and bus"
+
+# No explicit license found for DDOT, SMART or the People Mover feeds; treated as allowed
+# under the batch license rule.
+
+[[feeds]]   # DDOT buses
+url = "https://www.detroitmi.gov/Portals/0/docs/deptoftransportation/pdfs/ddot_gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-464/latest.zip"
+attribution = "Timetables: DDOT, SMART and Detroit People Mover; not endorsed by them"
+license = "https://www.detroitmi.gov/departments/detroit-department-transportation"
+
+[[feeds]]   # SMART suburban buses
+url = "https://apps1.smartbus.org/gtfs/smart_gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-414/latest.zip"
+license = "https://www.smartbus.org/about/developers"
+
+[[feeds]]   # Detroit People Mover
+url = "https://hosted-gtfs-feeds.s3.amazonaws.com/DPM/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2281/latest.zip"
+license = "https://www.thepeoplemover.com/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-83.08, 42.34]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

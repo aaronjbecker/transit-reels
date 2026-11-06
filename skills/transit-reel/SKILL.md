@@ -171,6 +171,40 @@ trains, `start = "00:30"` (trips past 24:00 carry over). Keep it near two minute
 past four the tool warns, because the dots blur and no vehicle can be followed. The person
 decides; recommend against a whole day in one reel, but make it if they ask.
 
+## Several cities in one reel
+
+A recipe with `[grid]` puts up to nine cities in a regular grid, the same local hours of each
+on one clock. It names recipes that already exist; `still`, `render` and `stats` take it like
+any other recipe.
+
+```toml
+title = "Nine cities, 8 a.m."
+
+[grid]
+cities = ["paris", "berlin", "new-york"]   # up to 9 recipes beside this file
+
+[time]
+start = "08:00"
+minutes = 20
+```
+
+- **One scale by default.** Every map is the same ground width, so sizes compare honestly, and
+  the subtitle says how wide. Set `width_km`, or leave it for the median of the cities' own
+  framings. `scale = "own"` keeps each city's own framing instead (then say so in the words).
+- **Biggest first.** Maps are ordered by vehicles in view at mid-window, so the grid reads as a
+  ranking; `order = "listed"` keeps your order.
+- **One clock.** Each city runs on its own local time, so "08:00" is 8 a.m. in each. They share
+  one calendar day where every timetable allows it. A city whose recipe pins a date keeps it,
+  unless the grid's `[time]` sets `date`.
+- **A city's entry can be a table:** `{ recipe = "new-york", label = "NYC", center = [-73.97, 40.74] }`
+  renames it or moves its map. Look at the still: a recipe's center is chosen for its own frame.
+- **Every city's required credit stays on,** each once. Nine cities make a long block, and the
+  maps shrink to leave room for it.
+- `columns`, `dot_scale`, `gap`, `background` and `count` are in `src/transit_reels/recipe.py`
+  (`GRID`). `[style]` in the grid recipe applies over every city's own.
+- The interactive page is one city at a time: `web` does not take a grid.
+- Each city gets its own bake for the grid's hours, beside its own, the first time.
+
 ## Numbers for the caption
 
 ```bash

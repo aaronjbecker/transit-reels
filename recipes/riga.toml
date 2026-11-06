@@ -1,0 +1,15 @@
+title = "Riga"
+subtitle = "tram, trolleybus and bus"
+
+# Rigas satiksme route timetables, data.gov.lv: license CC0 1.0
+# (https://data.gov.lv/dati/dataset/marsrutu-saraksti-rigas-satiksme-sabiedriskajam-transportam,
+# read 2 Nov 2026). No credit wording is required; the provider is named anyway.
+
+[feed]
+url = "https://data.gov.lv/dati/dataset/6d78358a-0095-4ce3-b119-6cde5d0ac54f/resource/8fd86705-c8ac-49bd-b1bf-db46064e0814/download/marsrutusaraksti09_2026.zip"
+attribution = "Timetable: Rigas satiksme via data.gov.lv, CC0 1.0"
+license = "https://creativecommons.org/publicdomain/zero/1.0/"
+
+[map]
+center = [24.11, 56.95]
+width_km = 14

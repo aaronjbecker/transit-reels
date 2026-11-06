@@ -1,0 +1,20 @@
+title = "Grenoble"
+subtitle = "tram and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/b6ec7ba4-09bc-46df-b9a1-79a2c2668cf2"
+mirror = "https://files.mobilitydatabase.org/tdg-81618/latest.zip"
+attribution = "Timetable: SMMAG / M Réso (TAG), ODbL"
+license = "https://transport.data.gouv.fr/datasets/horaires-theoriques-du-reseau-tag"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [5.725, 45.185]
+width_km = 16
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

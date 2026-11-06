@@ -1,0 +1,20 @@
+title = "Christchurch"
+subtitle = "bus and ferry"
+
+# Metro Christchurch (Environment Canterbury) GTFS. The official URL needs a developer key we
+# lack, so the Mobility Database mirror of the same feed is the url. Terms
+# (https://apidevelopers.metroinfo.co.nz/ and https://www.metroinfo.co.nz/about/developer-resources#terms)
+# not read; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://files.mobilitydatabase.org/mdb-1313/latest.zip"
+attribution = "Timetable: Metro Christchurch, Environment Canterbury"
+license = "https://www.metroinfo.co.nz/about/developer-resources#terms"
+
+[map]
+center = [172.64, -43.53]
+width_km = 20
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

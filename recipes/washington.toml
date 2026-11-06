@@ -1,0 +1,43 @@
+title = "Washington"
+subtitle = "Metrorail, Metrobus, Ride On, Connector and DASH"
+
+# WMATA developer license (https://developer.wmata.com/license) is read through the Mobility
+# Database mirror because the API needs a key we lack. Nothing found forbids a video.
+
+[[feeds]]   # Metrorail
+url = "https://api.wmata.com/gtfs/rail-gtfs-static.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1847/latest.zip"
+attribution = "Timetables: WMATA, Ride On, Fairfax Connector, DASH, ART; not endorsed by them"
+license = "https://developer.wmata.com/license"
+
+[[feeds]]   # Metrobus
+url = "https://api.wmata.com/gtfs/bus-gtfs-static.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1846/latest.zip"
+license = "https://developer.wmata.com/license"
+
+[[feeds]]   # Ride On
+url = "https://www.montgomerycountymd.gov/DOT-Transit/Resources/Files/GTFS/RideOnGTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-488/latest.zip"
+license = "https://www.montgomerycountymd.gov/DOT-Transit/"
+
+[[feeds]]   # DASH Alexandria
+url = "http://dashbus.com/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-482/latest.zip"
+license = "https://www.dashbus.com/"
+
+[[feeds]]   # Arlington Transit
+url = "https://www.arlingtontransit.com/shared/content/gtfs/art/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-485/latest.zip"
+license = "https://www.arlingtontransit.com/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-77.03, 38.91]
+width_km = 32
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

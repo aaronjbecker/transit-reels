@@ -1,0 +1,15 @@
+title = "Bratislava"
+subtitle = "tram, trolleybus and bus"
+
+# Dopravný podnik Bratislava GTFS on the city's open data portal; dataset item
+# aba12fd2cbac4843bc7406151bc66106 (data.bratislava) declares CC BY 4.0 in its licenseInfo.
+
+[feed]
+url = "https://www.arcgis.com/sharing/rest/content/items/aba12fd2cbac4843bc7406151bc66106/data"
+mirror = "https://files.mobilitydatabase.org/tld-3363/latest.zip"
+attribution = "Timetable: Dopravný podnik Bratislava / data.bratislava, CC BY 4.0"
+license = "https://creativecommons.org/licenses/by/4.0/"
+
+[map]
+center = [17.11, 48.15]
+width_km = 12

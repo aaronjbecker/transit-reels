@@ -1,0 +1,18 @@
+title = "Vienna"
+subtitle = "U-Bahn, tram and bus"
+
+# Wiener Linien: "Alle Daten der Wiener Linien werden unter der CCBY-Lizenz veröffentlicht",
+# use allowed with credit "unter Angabe der Datenherkunft" (https://www.wienerlinien.at/open-data,
+# read 2 Nov 2026). The CC BY version number was not on that page; CC BY 4.0 is the version the
+# open data catalog uses for the dataset, not checked on the catalog page itself.
+# The old Wiener Linien url no longer answers, so the Mobility Database copy is the one used.
+
+[feed]
+url = "http://www.wienerlinien.at/ogd_realtime/doku/ogd/gtfs/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-648/latest.zip"
+attribution = "Timetable: Wiener Linien, CC BY"
+license = "https://www.wienerlinien.at/open-data"
+
+[map]
+center = [16.37, 48.21]
+width_km = 17

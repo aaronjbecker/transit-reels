@@ -1,0 +1,9 @@
+title = "Northeast, 8 a.m."
+
+[grid]
+cities = [{ recipe = "new-york", center = [-73.95, 40.75] }, "washington", "philadelphia", "boston", "baltimore", "pittsburgh", "buffalo", "rochester", "providence"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

@@ -1,0 +1,15 @@
+title = "Budapest"
+subtitle = "metro, tram, trolleybus, HÉV and bus"
+
+# BKK open data (https://opendata.bkk.hu): no license text could be read (the page returned
+# only its title on 4 Nov 2026); nothing found that forbids this use.
+
+[feed]
+url = "https://go.bkk.hu/api/static/v1/public-gtfs/budapest_gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-990/latest.zip"
+attribution = "Timetable: Budapesti Közlekedési Központ (BKK)"
+license = "https://opendata.bkk.hu"
+
+[map]
+center = [19.06, 47.5]
+width_km = 17

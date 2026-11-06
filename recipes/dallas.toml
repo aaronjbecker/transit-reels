@@ -1,0 +1,23 @@
+title = "Dallas"
+subtitle = "DART light rail and bus"
+
+# DART legal notice (https://www.dart.org/transitdata/legalnotices.asp) not readable; no
+# explicit ban on this use found.
+
+[[feeds]]
+url = "http://www.dart.org/transitdata/latest/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-152/latest.zip"
+attribution = "Timetable: Dallas Area Rapid Transit (DART), not endorsed by DART"
+license = "https://www.dart.org/transitdata/legalnotices.asp"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-96.8, 32.79]
+width_km = 34
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

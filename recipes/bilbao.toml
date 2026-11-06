@@ -1,0 +1,29 @@
+title = "Bilbao"
+subtitle = "metro, tram, train and bus"
+
+[[feeds]]
+url = "https://ctb-gtfs.s3.eu-south-2.amazonaws.com/metrobilbao.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3052/latest.zip"
+attribution = "Timetable: Metro Bilbao, Bilbobus, Euskotren"
+license = "https://data.ctb.eus/en/pages/legal-notice"
+
+[[feeds]]
+url = "https://nap.transportes.gob.es/api/Fichero/download/1460"
+mirror = "https://files.mobilitydatabase.org/mdb-2681/latest.zip"
+license = "https://nap.transportes.gob.es/licencia-datos"
+
+[[feeds]]
+url = "https://nap.transportes.gob.es/api/Fichero/download/1263"
+mirror = "https://files.mobilitydatabase.org/mdb-2715/latest.zip"
+license = "https://nap.transportes.gob.es/licencia-datos"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-2.95, 43.27]
+width_km = 16
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]

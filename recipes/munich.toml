@@ -1,0 +1,16 @@
+title = "Munich"
+subtitle = "U-Bahn, tram and bus"
+
+# MVG's data page (https://www.mvg.de/verbindungen/Fahrplandaten.html, read 4 Nov 2026) states
+# no license or attribution terms and no prohibition; it offers the GTFS as raw data without
+# warranty. The S-Bahn is not in this feed.
+
+[feed]
+url = "https://www.mvg.de/static/gtfs/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2333/latest.zip"
+attribution = "Timetable: Münchner Verkehrsgesellschaft (MVG)"
+license = "https://www.mvg.de/verbindungen/Fahrplandaten.html"
+
+[map]
+center = [11.575, 48.14]
+width_km = 18

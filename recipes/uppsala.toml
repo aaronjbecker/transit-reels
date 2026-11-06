@@ -1,0 +1,17 @@
+title = "Uppsala"
+subtitle = "bus"
+
+# Trafiklab regional GTFS (Samtrafiken); license page https://www.trafiklab.se/api/gtfs-datasets/gtfs-regional/#licence lists CC0 (to confirm).
+
+[feed]
+url = "https://opendata.samtrafiken.se/gtfs/ul/ul.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3238/latest.zip"
+key = "trafiklab"
+key_param = "key"
+signup = "https://developer.trafiklab.se/register"
+attribution = "Timetable: Upplands Lokaltrafik (UL), via Trafiklab"
+license = "https://www.trafiklab.se/api/gtfs-datasets/gtfs-regional/#licence"
+
+[map]
+center = [17.64, 59.86]
+width_km = 16

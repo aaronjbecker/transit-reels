@@ -1,0 +1,16 @@
+title = "Warsaw"
+subtitle = "metro, tram, train and bus"
+
+# ZTM Warszawa data as repackaged by Mikołaj Kuranowski (https://mkuran.pl/gtfs/), listed there
+# as CC0 1.0 with attributions to ZTM Warszawa, Mikołaj Kuranowski and OpenStreetMap
+# contributors. ZTM's own usage terms (Polish) were not read; no prohibition found.
+
+[feed]
+url = "https://mkuran.pl/gtfs/warsaw.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2092/latest.zip"
+attribution = "Timetable: ZTM Warszawa via mkuran.pl, CC0 1.0"
+license = "https://mkuran.pl/gtfs/"
+
+[map]
+center = [21.01, 52.23]
+width_km = 18

@@ -1,0 +1,24 @@
+title = "Portland"
+subtitle = "MAX light rail, streetcar and bus"
+
+# TriMet developer terms (https://developer.trimet.org/terms_of_use.shtml): site content may
+# not be republished without consent, but nothing explicitly forbids a video made from the
+# timetable; treated as allowed under the batch license rule.
+
+[[feeds]]
+url = "http://developer.trimet.org/schedule/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-247/latest.zip"
+attribution = "Timetable: TriMet GTFS, not endorsed by TriMet"
+license = "https://developer.trimet.org/terms_of_use.shtml"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-122.66, 45.52]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

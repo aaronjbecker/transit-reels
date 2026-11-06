@@ -1,0 +1,23 @@
+title = "St. Louis"
+subtitle = "MetroLink and bus"
+
+# Metro Transit developer terms (https://www.metrostlouis.org/developer-resources/) allow
+# use of the data.
+
+[[feeds]]
+url = "https://metrostlouis.org/Transit/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-190/latest.zip"
+attribution = "Timetable: Metro Transit St. Louis, not endorsed by Metro Transit"
+license = "https://www.metrostlouis.org/developer-resources/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-90.25, 38.64]
+width_km = 26
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

@@ -5,6 +5,7 @@
   transit-reels still recipe.toml        one frame as PNG, to check the framing fast
   transit-reels render recipe.toml       the video (MP4) and its first frame (PNG)
   transit-reels render recipe.toml --format horizontal    the same, 16:9 for X / LinkedIn
+  (a recipe with [grid] puts up to nine cities in one reel: still, render and stats take it too)
   transit-reels stats recipe.toml        runs, paths and vehicles moving: numbers for a caption
   transit-reels key set <name>           store an API key privately, for feeds that need one
   transit-reels web recipe.toml          a single self-contained interactive HTML page
@@ -22,12 +23,14 @@ import json
 import sys
 import time
 import urllib.request
+import zipfile
 from collections import Counter
 from pathlib import Path
 
 import numpy as np
 
 from . import bake as bake_mod
+from . import grid as grid_mod
 from . import keys as keys_mod
 from . import recipe as recipe_mod
 from . import render as render_mod
@@ -59,6 +62,23 @@ def cached_feed(url: str) -> Path:
 
 
 def feed_path(recipe: dict, feed: dict) -> Path:
+    """The feed, or with `member` the feed zipped inside the download, unpacked beside it once."""
+    outer = download_feed(recipe, feed)
+    if not feed.get("member"):
+        return outer
+    inner = outer.with_name(f"{outer.stem}-{re.sub(r'[^A-Za-z0-9]+', '-', feed['member'])}.zip")
+    if not inner.exists():
+        with zipfile.ZipFile(outer) as z:
+            try:
+                data = z.read(feed["member"])
+            except KeyError:
+                raise SystemExit(f"{outer.name} has no {feed['member']}. Inside it: " + ", ".join(z.namelist()[:20]))
+        inner.with_suffix(".part").write_bytes(data)
+        inner.with_suffix(".part").rename(inner)
+    return inner
+
+
+def download_feed(recipe: dict, feed: dict) -> Path:
     """A local feed if the recipe names one, else the URL downloaded once into work/feeds/
     (falling back to the Mobility Database mirror when the agency's server refuses, or when the
     agency wants a key you have not set yet)."""
@@ -136,6 +156,7 @@ def cmd_inspect(args) -> None:
     src = args.feed
     if src.endswith(".toml"):  # a recipe: inspect its (first) feed, downloading it with its key
         recipe = recipe_mod.load(src)
+        no_grid(recipe, "inspect")
         src = str(feed_path(recipe, recipe["feeds"][0]))
     if src.startswith(("http://", "https://")):
         dest = cached_feed(src)  # a recipe with the same url reuses it
@@ -165,6 +186,11 @@ def cmd_inspect(args) -> None:
         log(f"  {day:%a %Y-%m-%d}  {n:>7,}  {'#' * round(40 * n / top)}")
 
 
+def no_grid(recipe: dict, command: str) -> None:
+    if "grid" in recipe:
+        raise SystemExit(f"`{command}` works on one city: run it on a city's own recipe, not on a [grid].")
+
+
 def bake_cached(recipe: dict) -> tuple[dict, dt.date]:
     """The baked window, re-baked only when the feeds, the day or the window change."""
     feeds = [Feed(feed_path(recipe, f)) for f in recipe["feeds"]]
@@ -173,11 +199,12 @@ def bake_cached(recipe: dict) -> tuple[dict, dt.date]:
     start = recipe_mod.clock(t["start"])
     end = start + int(t["minutes"] * 60)
     work = recipe_mod.work_dir(recipe)
-    out = work / "bake.npz"
+    tag = recipe.get("_bake_tag", "")
+    out = work / f"bake{tag}.npz"
     key = json.dumps([[str(f.path), f.path.stat().st_mtime, spec["route_types"], spec["retype"], spec["straight"], 5]
                       for f, spec in zip(feeds, recipe["feeds"])]
                      + [day.isoformat(), start, end])
-    stamp = work / "bake.key"
+    stamp = work / f"bake{tag}.key"
     if not out.exists() or not stamp.exists() or stamp.read_text() != key:
         log(f"baking {recipe['slug']}: {day:%a %b} {day.day}, {day.year}, {t['start']} for {t['minutes']} min")
         parts = []
@@ -203,9 +230,11 @@ def prepare(recipe: dict, fmt: str | None = None) -> tuple[dict, Frame, dict, dt
     return baked, frame, recipe_mod.fill_words(recipe, day, frame.width_km), day, fmt
 
 
-def fit_frame(recipe: dict, baked: dict, fmt: str | None = None) -> Frame:
-    """The camera for a format: the recipe's own framing, or the one it implies for another shape."""
+def fit_frame(recipe: dict, baked: dict, fmt: str | None = None, size: tuple[int, int] | None = None) -> Frame:
+    """The camera for a format: the recipe's own framing, or the one it implies for another shape
+    (`size`: any other shape, keeping the center and the ground area)."""
     fmt, W, H = recipe_mod.frame_spec(recipe, fmt)
+    W, H = size or (W, H)
     m = recipe["map"]
     own = m.get(fmt) if isinstance(m.get(fmt), dict) else {}
     center, width_km = own.get("center") or m["center"], own.get("width_km")
@@ -246,8 +275,90 @@ def frame_times(recipe: dict, baked: dict) -> np.ndarray:
     return baked["start"] + (baked["end"] - baked["start"]) * np.arange(n) / n
 
 
+def shared_day(cities: list[dict]) -> None:
+    """Every city in a grid on one calendar day where the timetables allow it. Cities with a date
+    of their own keep it."""
+    open_date = [c for c in cities if c["time"]["date"] == "next-weekday"]
+    if len(open_date) < 2:
+        return
+    try:
+        day = pick_weekday([Feed(feed_path(c, f)) for c in open_date for f in c["feeds"]])
+    except SystemExit as err:
+        log(f"  no one day suits every city ({err}); each uses its own")
+        return
+    for c in open_date:
+        c["time"]["date"] = day.isoformat()
+
+
+def prepare_grid(recipe: dict, fmt: str | None = None) -> tuple[list[grid_mod.Cell], grid_mod.GridLayout, dict, str, Frame]:
+    """Bake every city (cached), lay out the page, and frame and draw each city's map."""
+    fmt, W, H = recipe_mod.frame_spec(recipe, fmt)
+    cities = recipe_mod.cities(recipe)
+    shared_day(cities)
+    baked = []
+    days = []
+    for city in cities:
+        b, day = bake_cached(city)
+        baked.append(b)
+        days.append(day)
+        log(f"  {city['label']}: {day:%a %b} {day.day}, {day.year}")
+    g = recipe["grid"]
+    page = Frame((0.0, 0.0), 1.0, W, H)
+    # The layout depends on the credit and the words, the words on the scale, the scale only on
+    # the cells' shape: measure the shape with the longest words first.
+    probe = grid_mod.words(recipe, cities, days, 0.0)
+    cw, ch = grid_mod.GridLayout(page, recipe["style"], probe, len(cities), g["columns"], g["gap"]).cell_size
+    frames_ = [fit_frame(c, b, size=(cw, ch)) for c, b in zip(cities, baked)]
+    same = g["scale"] == "same"
+    km = float(g["width_km"] or np.median([f.width_km for f in frames_])) if same else 0.0
+    if km:
+        km = float(f"{km:.2g}") if not g["width_km"] else km  # a round number, for the subtitle
+    if g["order"] == "count":
+        mid = recipe_mod.clock(recipe["time"]["start"]) + recipe["time"]["minutes"] * 30.0
+        def shown(i):
+            city, f = cities[i], frames_[i]
+            view = Frame(tuple(city["cell"].get("center") or f.center), float(city["cell"].get("width_km") or km or f.width_km), cw, ch)
+            X, Y = render_mod.Vehicles(baked[i], view, city["style"]).at(np.array([mid]))
+            return int(((X[0] >= 0) & (X[0] < cw) & (Y[0] >= 0) & (Y[0] < ch)).sum())
+        rank = sorted(range(len(cities)), key=shown, reverse=True)
+        cities, baked, days, frames_ = ([v[i] for i in rank] for v in (cities, baked, days, frames_))
+    words = grid_mod.words(recipe, cities, days, km)
+    L = grid_mod.GridLayout(page, recipe["style"], words, len(cities), g["columns"], g["gap"])
+    cw, ch = L.cell_size
+    u = max(min(cw, ch) / 1080, g["dot_scale"])
+    cells = []
+    for city, b, f, (x, y) in zip(cities, baked, frames_, L.rects):
+        center = city["cell"].get("center") or f.center
+        width = city["cell"].get("width_km") or km or f.width_km
+        frame = Frame(tuple(center), float(width), cw, ch)
+        wc = None
+        if city["map"]["water"]:
+            wc = recipe_mod.work_dir(city).parent / "water" / "grid.json"  # marks the folder; grids read tiles
+        log(f"  map of {city['label']}: {frame.width_km:g} km wide")
+        base = render_mod.plate(b, frame, city["style"], wc, log, u=u, water_tiles=True)
+        cells.append(grid_mod.Cell(city["label"], b, frame, city["style"], base, x, y, u))
+    return cells, L, words, fmt, page
+
+
+def grid_times(recipe: dict) -> np.ndarray:
+    v, t = recipe["video"], recipe["time"]
+    start = recipe_mod.clock(t["start"])
+    n = int(v["seconds"] * v["fps"])
+    return start + t["minutes"] * 60 * np.arange(n) / n
+
+
 def cmd_still(args) -> None:
     recipe = recipe_mod.load(args.recipe)
+    if "grid" in recipe:
+        cells, L, words, fmt, page = prepare_grid(recipe, args.format)
+        t = recipe_mod.clock(args.at or recipe["time"]["start"])
+        _, img = next(grid_mod.frames(cells, L, page, recipe, words, np.array([float(t)])))
+        at = f"-{render_mod.hhmm(t).replace(':', '')}" if args.at else ""
+        out = Path(args.out) if args.out else out_name(recipe, fmt, f"-still{at}.png")
+        from PIL import Image
+        Image.fromarray(img).save(out)
+        log(f"wrote {out}")
+        return
     baked, frame, words, _, fmt = prepare(recipe, args.format)
     base = base_plate(recipe, baked, frame, fmt)
     t = recipe_mod.clock(args.at) if args.at else baked["start"]
@@ -261,6 +372,16 @@ def cmd_still(args) -> None:
 
 def cmd_render(args) -> None:
     recipe = recipe_mod.load(args.recipe)
+    if "grid" in recipe:
+        cells, L, words, fmt, page = prepare_grid(recipe, args.format)
+        out = Path(args.out) if args.out else out_name(recipe, fmt, ".mp4")
+        times = grid_times(recipe)
+        log(f"rendering {len(times)} frames at {page.width}x{page.height}, {len(cells)} cities")
+        t0 = time.time()
+        render_mod.encode(grid_mod.frames(cells, L, page, recipe, words, times), out, page.width, page.height,
+                          recipe["video"]["fps"], out.with_suffix(".png"), log)
+        log(f"wrote {out} and {out.with_suffix('.png')} in {time.time() - t0:.0f} s")
+        return
     baked, frame, words, day, fmt = prepare(recipe, args.format)
     base = base_plate(recipe, baked, frame, fmt)
     out = Path(args.out) if args.out else out_name(recipe, fmt, ".mp4")
@@ -275,6 +396,7 @@ def cmd_render(args) -> None:
 def cmd_web(args) -> None:
     from . import web
     recipe = recipe_mod.load(args.recipe)
+    no_grid(recipe, "web")
     baked, frame, words, day, fmt = prepare(recipe, args.format)
     base = base_plate(recipe, baked, frame, fmt)
     # The interactive page opens on the reel's framing for the screen's shape: vertical on a
@@ -304,12 +426,24 @@ def cmd_key(args) -> None:
 def cmd_stats(args) -> None:
     """The numbers for a caption: vehicle runs, distinct paths, vehicles moving over the window."""
     recipe = recipe_mod.load(args.recipe)
+    if "grid" in recipe:
+        cells, *_ = prepare_grid(recipe)
+        log("vehicle runs in each map:")
+        for c in cells:
+            log(f"  {c.label:<24} {grid_mod.runs_in_frame(c):>7,}")
+        return
     baked, day = bake_cached(recipe)
     pts, off = baked["trip_pts"], baked["trip_off"]
     t0, t1 = pts[off[:-1], 2], pts[off[1:] - 1, 2]
     log(f"{day:%A, %B} {day.day}, {day.year}, {render_mod.hhmm(baked['start'])} to {render_mod.hhmm(baked['end'])}")
     inside = (t0 <= baked["end"]) & (t1 >= baked["start"])  # the bake keeps a margin either side
     log(f"vehicle runs in the window: {int(inside.sum()):,}")
+    # A regional or national feed runs far past the picture; this is the number a caption wants.
+    frame = fit_frame(recipe, baked)
+    x, y = frame.px(pts[:, 0], pts[:, 1])
+    seen = (x >= 0) & (x < frame.width) & (y >= 0) & (y < frame.height) & (pts[:, 2] >= baked["start"]) & (pts[:, 2] <= baked["end"])
+    in_frame = int(sum(seen[a:b].any() for a, b, ok in zip(off[:-1], off[1:], inside) if ok))
+    log(f"  of those, in the frame:   {in_frame:,}")
     log(f"distinct paths drawn:       {len(baked['net_off']) - 1:,}")
     log(f"routes:                     {len(set(baked['trip_route'][inside].tolist())):,}")
     types = {}

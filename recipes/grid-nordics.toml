@@ -1,0 +1,9 @@
+title = "The Nordics, 8 a.m."
+
+[grid]
+cities = ["stockholm", "copenhagen", "gothenburg", "helsinki", "oslo", "malmo"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

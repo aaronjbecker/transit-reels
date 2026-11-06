@@ -95,6 +95,16 @@ A few agencies want a (free) API key. `find` says which, and where to sign up; s
 with `uv run transit-reels key set <name>`, which keeps it out of the recipe in a private file.
 Until then the tool uses the keyless Mobility Database mirror.
 
+## Several cities in one reel
+
+A recipe with `[grid]` puts up to nine cities in a regular grid: the same local hours of each,
+on one clock, at one ground scale. Its `cities` list names recipes you already have. See
+[`recipes/nine-cities.toml`](recipes/nine-cities.toml).
+
+```bash
+uv run transit-reels render recipes/nine-cities.toml
+```
+
 ## The interactive page
 
 <p align="center">

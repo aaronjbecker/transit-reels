@@ -1,0 +1,15 @@
+title = "Auckland"
+subtitle = "train, bus and ferry"
+
+# Auckland Transport open data: "The data we release is free to use by developers, researchers
+# and open data enthusiasts and is licensed under a Creative Commons licence ... This work is
+# licensed under a Creative Commons Attribution 4.0 International License", on the same page
+# as the GTFS download (https://at.govt.nz/about-us/at-data-sources, read 2 Nov 2026). The
+# real-time APIs have separate terms; this reel uses only the static timetable. Some trips in
+# the feed are headway templates (frequencies.txt), expanded into one run per headway.
+
+[[feeds]]
+url = "https://gtfs.at.govt.nz/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1029/latest.zip"
+attribution = "Timetables: Auckland Transport, CC BY 4.0"
+license = "https://at.govt.nz/about-us/at-data-sources"

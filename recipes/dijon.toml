@@ -1,0 +1,20 @@
+title = "Dijon"
+subtitle = "tram and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/e0dbd217-15cd-4e28-9459-211a27511a34"
+mirror = "https://files.mobilitydatabase.org/tdg-83931/latest.zip"
+attribution = "Timetable: Dijon Métropole (Divia), Licence Ouverte 2.0"
+license = "https://transport.data.gouv.fr/datasets/gtfs-diviamobilites"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [5.04, 47.32]
+width_km = 14
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

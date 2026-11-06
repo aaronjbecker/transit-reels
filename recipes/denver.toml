@@ -1,0 +1,20 @@
+title = "Denver"
+subtitle = "light rail, commuter rail and bus"
+
+[feed]
+url = "https://www.rtd-denver.com/files/gtfs/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-178/latest.zip"
+attribution = "Timetable: public GTFS data, unofficial, not endorsed by or affiliated with RTD"
+license = "https://www.rtd-denver.com/open-records/open-spatial-information/gtfs-realtime-license-agreement"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-104.97, 39.75]
+width_km = 34
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

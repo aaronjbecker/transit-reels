@@ -1,0 +1,20 @@
+title = "Naples"
+subtitle = "metro, tram, funicular and bus"
+
+[feed]
+url = "https://www.anm.it/google/google-transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-893/latest.zip"
+attribution = "Timetable: Azienda Napoletana Mobilità (ANM)"
+license = "https://www.anm.it/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [14.25, 40.85]
+width_km = 14
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

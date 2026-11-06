@@ -1,0 +1,14 @@
+title = "Rio de Janeiro"
+subtitle = "bus"
+
+# data.rio listing; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://www.arcgis.com/sharing/rest/content/items/8ffe62ad3b2f42e49814bf941654ea6c/data"
+mirror = "https://files.mobilitydatabase.org/mdb-1791/latest.zip"
+attribution = "Timetable: Prefeitura do Rio de Janeiro (SMTR), data.rio"
+license = "https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about"
+
+[map]
+center = [-43.40, -22.92]
+width_km = 40

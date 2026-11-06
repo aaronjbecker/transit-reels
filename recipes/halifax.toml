@@ -1,0 +1,18 @@
+title = "Halifax"
+subtitle = "bus and ferry"
+
+# Halifax open data terms of use; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "http://gtfs.halifax.ca/static/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-734/latest.zip"
+attribution = "Timetable: Halifax Transit"
+license = "http://www.halifax.ca/opendata/OD_TermsOfUse.php"
+
+[map]
+center = [-63.6, 44.66]
+width_km = 18
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

@@ -1,0 +1,22 @@
+title = "Las Vegas"
+subtitle = "bus, deuce and strip lines"
+
+# RTC developer page: no explicit ban found.
+
+[[feeds]]
+url = "https://developer.rtcsnv.com/transitData/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2351/latest.zip"
+attribution = "Timetable: Regional Transportation Commission of Southern Nevada (RTC), not endorsed by the RTC"
+license = "https://developer.rtcsnv.com/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-115.17, 36.14]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

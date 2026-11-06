@@ -1,0 +1,16 @@
+title = "Bordeaux"
+subtitle = "tram, river shuttle and bus"
+
+[feed]
+url = "https://www.data.gouv.fr/api/1/datasets/r/10b87ffe-e6bb-494d-93df-bb6019e223d9"
+mirror = "https://files.mobilitydatabase.org/tdg-83024/latest.zip"
+attribution = "Timetable: Bordeaux Métropole (TBM), Licence Ouverte 2.0"
+license = "https://transport.data.gouv.fr/datasets/offres-de-services-bus-tram-et-scolaire-au-format-gtfs-netex-gtfs-rt-siri-lite"
+
+[map]
+center = [-0.59, 44.84]
+width_km = 16
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

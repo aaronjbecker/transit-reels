@@ -65,10 +65,13 @@ def font(size: int, weight: str = "Regular") -> ImageFont.FreeTypeFont:
 WARNINGS: list[str] = []  # problems worth repeating at the end of a command
 
 
-def plate(baked: dict, frame: Frame, style: dict, water_cache: Path | None, log=print) -> np.ndarray:
-    """The still map under the vehicles: land, water and the network's lines. float32 HxWx3."""
+def plate(baked: dict, frame: Frame, style: dict, water_cache: Path | None, log=print, u: float | None = None,
+          water_tiles: bool = False) -> np.ndarray:
+    """The still map under the vehicles: land, water and the network's lines, each colored line
+    glowing softly in its own color. `u` is the scale of lines and dots, by default the frame's
+    short side over 1080. float32 HxWx3."""
     W, H, ss = frame.width, frame.height, 2
-    u = min(W, H) / 1080
+    u = u or min(W, H) / 1080
     img = Image.new("RGB", (W * ss, H * ss), style["land"])
     if water_cache is not None:
         try:
@@ -76,16 +79,24 @@ def plate(baked: dict, frame: Frame, style: dict, water_cache: Path | None, log=
             if frame.width_km > water_mod.COUNTRY_KM:
                 m = water_mod.natural_earth_mask(frame.bbox(0.1), water_cache.parent / "naturalearth", to_px,
                                                  W * ss, H * ss, log)
+            elif water_tiles:
+                m = water_mod.tiles_mask(frame.bbox(0.02), frame.width_km, water_cache.parent / "tiles", to_px, W * ss, H * ss, log)
             else:
                 osm = water_mod.fetch(frame.bbox(0.1), water_cache, log)
                 m = water_mod.mask(osm, to_px, W * ss, H * ss)
             img.paste(style["water"], mask=Image.fromarray(m.astype(np.uint8) * 255))
         except Exception as err:
             log(f"  ! no water layer ({err}); drawing land only")
-            WARNINGS.append(f"no water drawn ({err}). OpenStreetMap's free Overpass service may be busy: "
+            WARNINGS.append(f"no water drawn ({err}). The free OpenStreetMap services may be busy: "
                             "run again later, or set `water = false` under [map] if land only is intended.")
 
     draw = ImageDraw.Draw(img, "RGBA")
+    # Colored lines go on one opaque layer with one alpha, so a line reads the same however many
+    # of its trips' paths overlap (drawn straight on the map, each path would darken the next).
+    lines = Image.new("RGB", img.size, (0, 0, 0))
+    lines_draw = ImageDraw.Draw(lines)
+    lines_a = Image.new("L", img.size, 0)
+    lines_a_draw = ImageDraw.Draw(lines_a)
     routes = baked["routes"]
     pts, off, rix = baked["net_pts"], baked["net_off"], baked["net_route"]
     x, y = frame.px(pts[:, 0], pts[:, 1])
@@ -98,12 +109,19 @@ def plate(baked: dict, frame: Frame, style: dict, water_cache: Path | None, log=
             c = (route_color(r, style) * 255).astype(int)
             w, a = ((style["line_width"], style["line_alpha"]) if tier(r["type"]) == 2
                     else (style["thin_width"], style["thin_alpha"]))
-            draw.line(seg, fill=(*c, int(255 * a)), width=max(1, round(w * u * ss)), joint="curve")
+            width = max(1, round(w * u * ss))
+            lines_draw.line(seg, fill=tuple(int(v) for v in c), width=width, joint="curve")
+            lines_a_draw.line(seg, fill=int(255 * a), width=width, joint="curve")
         else:
             c = rgb(style["network"]) * 255
             draw.line(seg, fill=(*c.astype(int), int(255 * style["network_alpha"])), width=max(1, round(style["network_width"] * u * ss)))
-    img = img.resize((W, H), Image.LANCZOS)
-    return np.asarray(img, np.float32) / 255
+    img.paste(lines, mask=lines_a)
+    out = np.asarray(img.resize((W, H), Image.LANCZOS), np.float32) / 255
+    if style["line_glow_gain"] > 0:
+        # Screened over the map, so the glow lightens what is under it and never burns to white.
+        soft = lines.resize((W, H), Image.BILINEAR).filter(ImageFilter.GaussianBlur(style["line_glow_sigma"] * u))
+        out = 1 - (1 - out) * (1 - np.clip(np.asarray(soft, np.float32) / 255 * style["line_glow_gain"], 0, 1))
+    return out
 
 
 # ---------------------------------------------------------------- vehicles
@@ -148,8 +166,10 @@ class Vehicles:
         rix = baked["trip_route"]
         self.is_line = np.array([routes[i]["type"] in style["line_types"] for i in rix], bool)
         col = np.array([route_color(routes[i], style) for i in rix]).reshape(-1, 3)
-        # A train is its line's color lifted toward white, so it stands out on its own line.
+        # Whatever has a color on the map is a dot of that color with a soft glow of it; whiten
+        # lifts the color toward white so the dot still shows against its own line.
         thin = np.array([routes[i]["type"] in style["thin_types"] for i in rix], bool)
+        self.colored = self.is_line | thin
         lift = np.where(self.is_line, style["line_dot"]["whiten"], np.where(thin, style["thin_whiten"], 0.0))[:, None]
         self.col = col + (1 - col) * lift
         self.t0 = self.t[off[:-1]]
@@ -230,6 +250,7 @@ class Layout:
         self.bottom = y + 90 * u
         cy = style["credit_y"] if style["credit_y"] is not None else (0.80 if vertical else None)
         self.credit_y = cy * frame.height if cy is not None else frame.height - 54 * u
+        self.credit_x, self.credit_w = frame.width / 2, frame.width - 80 * u
 
 
 def spaced(d: ImageDraw.ImageDraw, xy, text: str, f, fill, tracking: float) -> None:
@@ -252,9 +273,9 @@ def shadowed(layer: Image.Image, u: float, strength: float) -> Image.Image:
     return Image.alpha_composite(shadow, layer)
 
 
-def chrome(words: dict, frame: Frame, style: dict) -> tuple[np.ndarray, np.ndarray]:
+def chrome(words: dict, frame: Frame, style: dict, L: Layout | None = None) -> tuple[np.ndarray, np.ndarray]:
     """Title block and credit as color + alpha layers (HxWx3, HxWx1)."""
-    L = Layout(frame, style, words)
+    L = L or Layout(frame, style, words)
     W, H, u = L.W, L.H, L.u
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
@@ -271,12 +292,12 @@ def chrome(words: dict, frame: Frame, style: dict) -> tuple[np.ndarray, np.ndarr
                fill=style["text"])
     credit = words.get("credit", "")
     if credit:
-        lines, f = credit_lines(credit, int(22 * u), W - 80 * u)
+        lines, f = credit_lines(credit, int(22 * u), L.credit_w)
         step = f.size * 1.35
         # Vertical reels grow the credit down from its line; at the foot of a frame it grows up.
         y = L.credit_y if H > W else L.credit_y - step * (len(lines) - 1)
         for i, line in enumerate(lines):
-            d.text((W / 2, y + i * step), line, font=f, fill=style["muted"], anchor="ma")
+            d.text((L.credit_x, y + i * step), line, font=f, fill=style["muted"], anchor="ma")
     a = np.asarray(shadowed(layer, u, style["text_shadow"]), np.float32) / 255
     return a[..., :3], a[..., 3:]
 
@@ -325,6 +346,42 @@ def hhmm(s: float) -> str:
     return f"{s // 3600:02d}:{s % 3600 // 60:02d}"
 
 
+def paint(base: np.ndarray, veh: Vehicles, x: np.ndarray, y: np.ndarray, on: np.ndarray, style: dict, u: float) -> np.ndarray:
+    """One moment's vehicles over the plate: the halos, then a rim, then the dots."""
+    H, W = base.shape[:2]
+    dot, line = style["dot"], style["line_dot"]
+    img = base
+    # A soft halo, its own layer under the rim and the dots. Overlapping halos merge up to a
+    # ceiling (glow_max), so a dense center stays clear, not fogged. Each kind has its own
+    # ceiling: colored vehicles can glow without a thousand white buses fogging the map.
+    for sel, spec in ((on & ~veh.colored, dot), (on & veh.colored, line)):
+        if spec.get("glow_gain", 0) > 0 and sel.any():
+            gbuf = np.zeros((4, H * W), np.float32)
+            splat(gbuf, H, W, x[sel], y[sel], veh.col[sel], spec["glow_gain"], sigma=spec["glow_sigma"] * u)
+            cap = spec.get("glow_max", style["glow_max"])
+            a = (cap * (1 - np.exp(-gbuf[3] / cap))).reshape(H, W, 1)
+            gcol = (gbuf[:3] / np.maximum(gbuf[3], 1e-6)).reshape(3, H, W).transpose(1, 2, 0)
+            img = img * (1 - a) + gcol * a
+    groups = ((on & ~veh.is_line, dot), (on & veh.is_line, line))
+    if style.get("outline"):
+        # A faint rim under every dot, so dots stand off their line and the map.
+        rim = rgb(style["outline"])
+        obuf = np.zeros((4, H * W), np.float32)
+        for sel, spec in groups:
+            splat(obuf, H, W, x[sel], y[sel], np.broadcast_to(rim, (int(sel.sum()), 3)), spec["gain"],
+                  radius=(spec["radius"] + style["outline_width"]) * u)
+        a = ((1 - np.exp(-obuf[3])) * style["outline_alpha"]).reshape(H, W, 1)
+        img = img * (1 - a) + rim * a
+    buf = np.zeros((4, H * W), np.float32)
+    for sel, spec in groups:
+        splat(buf, H, W, x[sel], y[sel], veh.col[sel], spec["gain"], radius=spec["radius"] * u)
+    # Dots are painted over the map, not added as light: where thousands overlap, the area takes
+    # their mean color instead of burning out to white.
+    cover = (1 - np.exp(-buf[3])).reshape(H, W, 1)
+    color = (buf[:3] / np.maximum(buf[3], 1e-6)).reshape(3, H, W).transpose(1, 2, 0)
+    return img * (1 - cover) + color * cover
+
+
 def frames(baked: dict, frame: Frame, style: dict, meta: dict, base: np.ndarray, times: np.ndarray):
     """Yield (time, uint8 HxWx3) for each time."""
     veh = Vehicles(baked, frame, style)
@@ -332,10 +389,7 @@ def frames(baked: dict, frame: Frame, style: dict, meta: dict, base: np.ndarray,
     L = Layout(frame, style, meta)
     clock = Stamp(L.clock_font, style["text"], L.u, style["text_shadow"])
     counter = Stamp(L.counter_font, style["muted"], L.u, style["text_shadow"])
-    dot, line = style["dot"], style["line_dot"]
     H, W = base.shape[:2]
-    glow = lambda spec: spec.get("glow_gain", 0) > 0
-    rim = rgb(style["outline"]) if style.get("outline") else None
     for c0 in range(0, len(times), 60):
         T = times[c0:c0 + 60]
         X, Y = veh.at(T)
@@ -343,37 +397,7 @@ def frames(baked: dict, frame: Frame, style: dict, meta: dict, base: np.ndarray,
             on = ~np.isnan(X[f])
             # Counted only where the viewer can see them.
             visible = on & (X[f] >= 0) & (X[f] < W) & (Y[f] >= 0) & (Y[f] < H)
-            img = base
-            if glow(dot) or glow(line):
-                # A faint halo, its own layer under the rim and the dots. Overlapping halos
-                # merge up to a ceiling (glow_max), so a dense center stays clear, not fogged.
-                gbuf = np.zeros((4, H * W), np.float32)
-                for sel, spec in ((on & ~veh.is_line, dot), (on & veh.is_line, line)):
-                    if glow(spec):
-                        splat(gbuf, H, W, X[f, sel], Y[f, sel], veh.col[sel], spec["glow_gain"],
-                              sigma=spec["glow_sigma"] * L.u)
-                cap = style["glow_max"]
-                a = (cap * (1 - np.exp(-gbuf[3] / cap))).reshape(H, W, 1)
-                gcol = (gbuf[:3] / np.maximum(gbuf[3], 1e-6)).reshape(3, H, W).transpose(1, 2, 0)
-                img = img * (1 - a) + gcol * a
-            if rim is not None:
-                # A faint gray rim under every dot, so dots stand off their line and the map.
-                obuf = np.zeros((4, H * W), np.float32)
-                for sel, spec in ((on & ~veh.is_line, dot), (on & veh.is_line, line)):
-                    n = int(sel.sum())
-                    splat(obuf, H, W, X[f, sel], Y[f, sel], np.broadcast_to(rim, (n, 3)), spec["gain"],
-                          radius=(spec["radius"] + style["outline_width"]) * L.u)
-                a = ((1 - np.exp(-obuf[3])) * style["outline_alpha"]).reshape(H, W, 1)
-                img = img * (1 - a) + rim * a
-            buf = np.zeros((4, H * W), np.float32)
-            for sel, spec in ((on & ~veh.is_line, dot), (on & veh.is_line, line)):
-                splat(buf, H, W, X[f, sel], Y[f, sel], veh.col[sel], spec["gain"], radius=spec["radius"] * L.u)
-            # Dots are painted over the map, not added as light: where thousands overlap, the
-            # area takes their mean color instead of burning out to white.
-            wsum = buf[3]
-            cover = (1 - np.exp(-wsum)).reshape(H, W, 1)
-            color = (buf[:3] / np.maximum(wsum, 1e-6)).reshape(3, H, W).transpose(1, 2, 0)
-            img = img * (1 - cover) + color * cover
+            img = paint(base, veh, X[f], Y[f], on, style, L.u)
             img = img * (1 - text_a) + text_rgb * text_a
             img = np.clip(img, 0, 1)
             end = clock.draw(img, hhmm(t), L.left, L.clock_y)

@@ -1,0 +1,22 @@
+title = "Cologne"
+subtitle = "Stadtbahn, tram, train and bus"
+
+# VRS (Verkehrsverbund Rhein-Sieg) GTFS: "Diese können unter der Datenlizenz Deutschland Zero
+# Version 2.0 verwendet werden." (https://www.vrs.de/fahren/fahrplanauskunft/opendata-/-openservice,
+# read 2 Nov 2026). dl-de/zero-2-0 needs no credit; the provider is named anyway.
+# The feed covers Cologne, Bonn and the Rhine-Sieg region; the frame is on Cologne.
+
+[feed]
+url = "http://download.vrsinfo.de/gtfs/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-778/latest.zip"
+attribution = "Timetable: Verkehrsverbund Rhein-Sieg (VRS), dl-de/zero-2-0"
+license = "https://www.govdata.de/dl-de/zero-2-0"
+
+[map]
+center = [6.98, 50.94]
+width_km = 17
+
+[style]
+# Stadtbahn lines are thin and dim on the dark map: a firmer line.
+thin_width = 2.2
+thin_alpha = 0.8

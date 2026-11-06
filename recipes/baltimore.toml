@@ -1,0 +1,33 @@
+title = "Baltimore"
+subtitle = "Metro SubwayLink, light rail and bus"
+
+# MTA Maryland GTFS (https://www.mta.maryland.gov/developer-resources): no explicit ban on this
+# use found; treated as allowed under the batch license rule.
+
+[[feeds]]   # local bus
+url = "https://mdotmta-gtfs.s3.amazonaws.com/mdotmta_gtfs_localbus.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-466/latest.zip"
+attribution = "Timetable: Maryland Transit Administration (MTA), not endorsed by the MTA"
+license = "https://www.mta.maryland.gov/developer-resources"
+
+[[feeds]]   # Metro SubwayLink
+url = "https://mdotmta-gtfs.s3.amazonaws.com/mdotmta_gtfs_metro.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-470/latest.zip"
+license = "https://www.mta.maryland.gov/developer-resources"
+
+[[feeds]]   # light rail
+url = "https://mdotmta-gtfs.s3.amazonaws.com/mdotmta_gtfs_lightrail.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-469/latest.zip"
+license = "https://www.mta.maryland.gov/developer-resources"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-76.62, 39.30]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

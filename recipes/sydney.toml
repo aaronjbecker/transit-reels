@@ -1,0 +1,20 @@
+title = "Sydney"
+subtitle = "train, metro, light rail, ferry and bus"
+
+# Transport for NSW "Timetables Complete GTFS" (Greater Sydney), Creative Commons Attribution 4.0
+# per the portal (https://opendata.transport.nsw.gov.au/dataset/timetables-complete-gtfs, not
+# re-read). The official download needs a portal key we lack, so the Mobility Database mirror
+# of the same feed is the url.
+
+[feed]
+url = "https://files.mobilitydatabase.org/mdb-2449/latest.zip"
+attribution = "Timetables: Transport for NSW, CC BY 4.0"
+license = "https://opendata.transport.nsw.gov.au/dataset/timetables-complete-gtfs"
+
+[map]
+center = [151.12, -33.85]
+width_km = 36
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

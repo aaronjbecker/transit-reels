@@ -1,0 +1,18 @@
+title = "Calgary"
+subtitle = "CTrain and bus"
+
+# Open Calgary terms page is script-rendered and unreadable here; no bar on this use known, so allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://data.calgary.ca/download/npk7-z3bj/application%2Fzip"
+mirror = "https://files.mobilitydatabase.org/mdb-712/latest.zip"
+attribution = "Timetable: Calgary Transit, City of Calgary Open Data"
+license = "https://data.calgary.ca/stories/s/u45n-7awa/"
+
+[map]
+center = [-114.06, 51.05]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

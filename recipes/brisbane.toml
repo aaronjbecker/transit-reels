@@ -1,0 +1,16 @@
+title = "Brisbane"
+subtitle = "train, bus, ferry and tram"
+
+# Translink South East Queensland GTFS, Queensland Government open data, Creative Commons
+# Attribution 4.0 (https://www.data.qld.gov.au/dataset/general-transit-feed-specification-gtfs-translink,
+# license field read 2 Nov 2026).
+
+[[feeds]]
+url = "https://gtfsrt.api.translink.com.au/GTFS/SEQ_GTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-3048/latest.zip"
+attribution = "Timetables: Translink, Queensland Government, CC BY 4.0"
+license = "https://creativecommons.org/licenses/by/4.0/"
+
+[map]
+center = [153.10, -27.62]
+width_km = 70

@@ -1,0 +1,18 @@
+title = "The Hague"
+subtitle = "tram, train and bus"
+
+# OVapi's Netherlands GTFS (http://gtfs.ovapi.nl/README, read 4 Nov 2026): built from open
+# files the transit agencies publish under an open license; "You are free to use this data ...
+# nor are you allowed to say you represent or impersonate any of the transit agencies". The
+# README names no specific license. The whole-country feed (125,000 runs a day) is shared by
+# the Dutch cities; each frame is its own city.
+
+[feed]
+url = "http://gtfs.ovapi.nl/gtfs-nl.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1077/latest.zip"
+attribution = "Timetable: OVapi, from Dutch transit agencies' open data"
+license = "http://gtfs.ovapi.nl/README"
+
+[map]
+center = [4.31, 52.08]
+width_km = 14

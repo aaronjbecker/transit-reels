@@ -1,0 +1,37 @@
+title = "Dublin"
+subtitle = "Luas, rail and bus"
+
+# Transport for Ireland GTFS: "This data is licensed under CC BY 4.0 and is attributed to the
+# National Transport Authority." (https://www.transportforireland.ie/transitData/PT_Data.html,
+# read 2 Nov 2026).
+
+[[feeds]]   # Dublin Bus
+url = "https://www.transportforireland.ie/transitData/Data/GTFS_Dublin_Bus.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2635/latest.zip"
+attribution = "Timetable: National Transport Authority (Transport for Ireland), CC BY 4.0"
+license = "https://www.transportforireland.ie/transitData/PT_Data.html"
+
+[[feeds]]   # Luas
+url = "https://www.transportforireland.ie/transitData/Data/GTFS_LUAS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2638/latest.zip"
+license = "https://www.transportforireland.ie/transitData/PT_Data.html"
+
+[[feeds]]   # Irish Rail (DART and commuter)
+url = "https://www.transportforireland.ie/transitData/Data/GTFS_Irish_Rail.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2637/latest.zip"
+license = "https://www.transportforireland.ie/transitData/PT_Data.html"
+
+[[feeds]]   # Go-Ahead Ireland buses
+url = "https://www.transportforireland.ie/transitData/Data/GTFS_GoAhead.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2639/latest.zip"
+license = "https://www.transportforireland.ie/transitData/PT_Data.html"
+
+[map]
+center = [-6.25, 53.33]
+width_km = 17
+
+[style]
+# Luas green is lost on the dark map: a brighter tram color and a firmer line.
+mode_colors = { "0" = "#7dffa0" }
+thin_width = 2.4
+thin_alpha = 0.85

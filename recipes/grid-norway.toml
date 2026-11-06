@@ -1,0 +1,9 @@
+title = "Norway, 8 a.m."
+
+[grid]
+cities = ["oslo", "bergen", "trondheim", "stavanger"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

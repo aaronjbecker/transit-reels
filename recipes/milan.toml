@@ -1,0 +1,12 @@
+title = "Milan"
+subtitle = "metro, tram and bus"
+
+[feed]
+url = "https://dati.comune.milano.it/gtfs.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2666/latest.zip"
+attribution = "Timetable: ATM Milano via Comune di Milano, CC BY 4.0"
+license = "https://dati.comune.milano.it/dataset/ds929-orari-del-trasporto-pubblico-locale-nel-comune-di-milano-in-formato-gtfs"
+
+[map]
+center = [9.19, 45.47]
+width_km = 16

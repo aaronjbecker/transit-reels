@@ -1,0 +1,18 @@
+title = "Edmonton"
+subtitle = "LRT and bus"
+
+# City of Edmonton open data (to confirm); terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/GTFS.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-714/latest.zip"
+attribution = "Timetable: Edmonton Transit Service, City of Edmonton"
+license = "https://data.strathcona.ca/Transportation/Transit-Bus-Schedule-GTFS-Data-Feed-Zip-File/2ek5-rxs5/data?no_mobile=true"
+
+[map]
+center = [-113.5, 53.54]
+width_km = 24
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

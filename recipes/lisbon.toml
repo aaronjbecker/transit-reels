@@ -1,0 +1,20 @@
+title = "Lisbon"
+subtitle = "metro, train, tram, ferry and bus"
+
+[feed]
+url = "https://go.tmlmobilidade.pt/hub/api/v1/plans/gtfs"
+mirror = "https://files.mobilitydatabase.org/mdb-3412/latest.zip"
+attribution = "Timetable: Transportes Metropolitanos de Lisboa (TML)"
+license = "https://github.com/tmlmobilidade/go"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-9.15, 38.73]
+width_km = 22
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

@@ -1,0 +1,20 @@
+title = "Honolulu"
+subtitle = "bus"
+
+[[feeds]]
+url = "https://www.thebus.org/transitdata/production/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-2350/latest.zip"
+attribution = "Timetable: TheBus (City and County of Honolulu), not endorsed by TheBus"
+license = "https://www.thebus.org/transitdata/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-157.86, 21.31]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

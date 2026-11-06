@@ -1,0 +1,14 @@
+# Nine cities in one reel: the same local hours of each, on one clock, at one ground scale.
+# Each name is a recipe beside this file. Every city's required credit stays on the frame.
+
+title = "Nine cities, 8 a.m."
+
+[grid]
+cities = ["paris", "berlin", "new-york", "chicago", "hamburg", "toronto", "prague", "vienna", "milan"]
+# columns = 3          # how many across; by default whatever makes the maps largest
+# scale = "own"        # each city's own framing, instead of one width for all
+# width_km = 30        # how wide each map is; default the median of the cities' framings
+
+[time]
+start = "08:00"
+minutes = 20

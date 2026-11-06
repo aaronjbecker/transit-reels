@@ -1,0 +1,18 @@
+title = "Perth"
+subtitle = "train, bus and ferry"
+
+# Transperth spatial data access page; terms not read in the time available, so no bar on this use is known; allowed under the batch license rule (5 Nov 2026).
+
+[feed]
+url = "http://www.transperth.wa.gov.au/TimetablePDFs/GoogleTransit/Production/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-1086/latest.zip"
+attribution = "Timetable: Transperth, Public Transport Authority of Western Australia"
+license = "https://www.transperth.wa.gov.au/About/Spatial-Data-Access"
+
+[map]
+center = [115.9, -31.95]
+width_km = 40
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

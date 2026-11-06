@@ -1,0 +1,50 @@
+title = "Los Angeles"
+subtitle = "Metro rail and buses"
+
+# LA Metro developer terms (https://developer.metro.net/terms-conditions/) prohibit
+# unauthorized redistribution and publication of the data and the use of the Metro marks;
+# they do not explicitly forbid a video made from the timetable, so under the batch license
+# rule it is allowed. The credit line does not use the Metro logo.
+
+[[feeds]]   # LA Metro buses
+url = "https://gitlab.com/LACMTA/gtfs_bus/raw/master/gtfs_bus.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-29/latest.zip"
+attribution = "Timetables: LA Metro, Big Blue Bus, LADOT, Foothill and Montebello; not endorsed by them"
+license = "https://developer.metro.net/terms-conditions/"
+
+[[feeds]]   # LA Metro rail
+url = "https://gitlab.com/LACMTA/gtfs_rail/raw/master/gtfs_rail.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-30/latest.zip"
+license = "https://developer.metro.net/terms-conditions/"
+
+[[feeds]]   # Big Blue Bus
+url = "http://gtfs.bigbluebus.com/current.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-37/latest.zip"
+license = "http://gtfs.bigbluebus.com/"
+
+[[feeds]]   # LADOT DASH and Commuter Express
+url = "https://ladotbus.com/gtfs"
+mirror = "https://files.mobilitydatabase.org/mdb-1210/latest.zip"
+license = "https://www.ladottransit.com/dla.html"
+
+[[feeds]]   # Foothill Transit
+url = "https://foothilltransit.rideralerts.com/myStop/GTFS-Zip.ashx"
+mirror = "https://files.mobilitydatabase.org/mdb-101/latest.zip"
+license = "https://www.foothilltransit.org/"
+
+[[feeds]]   # Montebello Bus Lines
+url = "https://mbl.rideralerts.com/infopoint/gtfs-zip.ashx"
+mirror = "https://files.mobilitydatabase.org/mdb-2201/latest.zip"
+license = "https://www.cityofmontebello.com/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-118.3, 34.03]
+width_km = 45
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

@@ -1,0 +1,9 @@
+title = "Nine big US cities, 8 a.m."
+
+[grid]
+cities = [{ recipe = "new-york", center = [-73.95, 40.75] }, "los-angeles", { recipe = "chicago", center = [-87.72, 41.86] }, "washington", "philadelphia", "boston", "seattle", "houston", "miami"]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

@@ -65,18 +65,20 @@ text = "#ffffff"
 muted = "#b4b8c0"
 # Route types drawn as colored lines with vehicles riding inside them. GTFS codes: 0 tram,
 # 1 subway, 2 rail, 3 bus, 4 ferry, 5 cable tram, 6 aerial lift, 7 funicular,
-# 11 trolleybus, 12 monorail. thin_types (trams) get a thin line in their own color and
-# tinted dots. The rest are white dots on a thin slate network.
+# 11 trolleybus, 12 monorail. thin_types (trams) get a thin line. Both ride in their line's
+# color, with a soft glow of it. The rest are white dots on a thin slate network.
 line_types = [1, 2, 4, 5, 6, 7, 12]
 thin_types = [0]
 thin_width = 1.5
-thin_alpha = 0.45
-thin_whiten = 0.8
+thin_alpha = 0.4
+thin_whiten = 0.2
 color_by = "route"           # or "mode": one color per mode, for whole countries
 # mode_colors = { "2" = "#ff8a4c", "4" = "#8ec9ff" }   # with color_by = "mode": every mode;
 #   with "route": only the listed modes, e.g. when an agency's tram color is too dark to read
-line_width = 5.5             # px for a 1080 frame
-line_alpha = 0.85
+line_width = 4.5             # px for a 1080 frame
+line_alpha = 0.4             # dim enough for a vehicle in the same color to show on its line
+line_glow_sigma = 6.0        # how far each colored line's glow spreads, px for a 1080 frame
+line_glow_gain = 0.6         # how bright; 0 for none
 network = "#5b7396"
 network_width = 1.0
 network_alpha = 0.45
@@ -86,8 +88,8 @@ text_shadow = 0.8            # soft shadow under the letters (0 = none)
 # credit_y = 0.80            # credit line, fraction of the height; default 0.80 vertical
 counter = "{n:,} vehicles"   # vehicles inside the frame at that moment; "" to hide
 
-glow_max = 0.12              # the most the halos cover where many overlap
-outline = "#9a9fa8"          # a faint gray rim around every dot; "" for none
+glow_max = 0.12              # the most a kind of dot's halos cover where many overlap
+outline = ""                 # a rim around every dot, e.g. "#9a9fa8"; "" for none
 outline_width = 1.2          # px for a 1080 frame
 outline_alpha = 0.85
 
@@ -97,9 +99,10 @@ gain = 4.0                   # how opaque; overlapping dots blend to their mean 
 glow_sigma = 2.5
 glow_gain = 0.12             # a faint halo around each dot; 0 for none
 
-[style.line_dot]             # trains, trams, ferries
-radius = 2.8
+[style.line_dot]             # trains, ferries; trams take their glow from here too
+radius = 3.2
 gain = 5.0
-glow_sigma = 3.5
-glow_gain = 0.25
-whiten = 0.88                # lift the line color toward white so trains show on their line
+glow_sigma = 5.0
+glow_gain = 0.8
+glow_max = 0.45
+whiten = 0.2                 # lift the line color a little toward white (1 = white)

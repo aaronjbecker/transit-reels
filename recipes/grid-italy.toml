@@ -1,0 +1,9 @@
+title = "Italy, 8 a.m."
+
+[grid]
+cities = ["rome", "milan", "turin", { recipe = "naples", center = [14.24, 40.87] }, "florence", { recipe = "palermo", center = [13.33, 38.11] }]
+
+[time]
+date = "2026-11-10"
+start = "08:00"
+minutes = 20

@@ -1,0 +1,22 @@
+title = "San Antonio"
+subtitle = "bus"
+
+# VIA developer terms not found; treated as allowed under the batch license rule.
+
+[[feeds]]
+url = "http://www.viainfo.net/BusService/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/tld-217/latest.zip"
+attribution = "Timetable: VIA Metropolitan Transit, not endorsed by VIA"
+license = "https://www.viainfo.net/developers/"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-98.49, 29.43]
+width_km = 26
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

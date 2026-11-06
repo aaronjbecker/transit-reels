@@ -1,0 +1,24 @@
+title = "Atlanta"
+subtitle = "MARTA rail and bus"
+
+# MARTA developer terms not readable; the site terms bar commercial use of site materials,
+# but nothing explicitly forbids a video of the timetable. Treated as allowed under the
+# batch license rule.
+
+[[feeds]]
+url = "https://www.itsmarta.com/google_transit_feed/google_transit.zip"
+mirror = "https://files.mobilitydatabase.org/mdb-368/latest.zip"
+attribution = "Timetable: MARTA, not endorsed by MARTA"
+license = "https://www.itsmarta.com/developers.aspx"
+
+[time]
+start = "08:00"
+minutes = 20
+
+[map]
+center = [-84.39, 33.77]
+width_km = 30
+
+[style]
+line_types = [0, 1, 2, 4, 5, 6, 7, 12]
+thin_types = []

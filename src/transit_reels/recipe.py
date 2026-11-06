@@ -25,6 +25,7 @@ DEFAULTS = {
     # key names a stored API key (never the key itself); key_param / key_header say how the
     # agency wants it sent; signup is where to get one.
     "feed": {"url": "", "mirror": "", "path": "", "attribution": "", "license": "", "route_types": None,
+             "member": "",  # a feed zipped inside the download: its path there, e.g. "2/google_transit.zip"
              "retype": {},  # fix mislabelled modes, e.g. {"T2" = 0}: route T2 is a tram
              # Trips without a route shape are left out (a straight line between stops is a
              # wrong path), and a feed with no shapes at all is refused; true draws them straight.
@@ -48,27 +49,32 @@ DEFAULTS = {
         "line_types": [1, 2, 4, 5, 6, 7, 12],
         "thin_types": [0],
         "thin_width": 1.5,
-        "thin_alpha": 0.45,
-        "thin_whiten": 0.8,
+        "thin_alpha": 0.4,
+        "thin_whiten": 0.2,
         # "route": each line in its own route_color. "mode": one color per mode (whole
         # countries), from mode_colors keyed by route type, e.g. {"2" = "#ff8a4c"}.
         "color_by": "route",
         "mode_colors": {},
-        "line_width": 5.5,
-        "line_alpha": 0.85,
+        # Lines stay dim enough for a vehicle in the same color to show on them.
+        "line_width": 4.5,
+        "line_alpha": 0.4,
+        # Every colored line glows softly in its own color (sigma in px at 1080; gain 0 for none).
+        "line_glow_sigma": 6.0,
+        "line_glow_gain": 0.6,
         "network": "#5b7396",
         "network_width": 1.0,
         "network_alpha": 0.45,
         "dot_color": "#ffffff",
-        # A faint rim around every dot (px at 1080); "" for none.
-        "glow_max": 0.12,  # the most the halos can cover where many overlap (0-1)
-        "outline": "#9a9fa8",
+        "glow_max": 0.12,  # the most a kind of dot's halos can cover where many overlap (0-1)
+        # A rim around every dot (px at 1080); "" for none.
+        "outline": "",
         "outline_width": 1.2,
         "outline_alpha": 0.85,
-        # A crisp disc per vehicle (radius in px at 1080; gain is how opaque) with a faint soft
-        # halo (glow_gain; 0 for none).
+        # A crisp disc per vehicle (radius in px at 1080; gain is how opaque) with a soft halo
+        # of its color (glow_gain; 0 for none). line_dot's halo also goes on trams, and whiten
+        # lifts the disc's color toward white so it reads against its own line.
         "dot": {"radius": 1.5, "gain": 4.0, "glow_sigma": 2.5, "glow_gain": 0.12},
-        "line_dot": {"radius": 2.8, "gain": 5.0, "glow_sigma": 3.5, "glow_gain": 0.25, "whiten": 0.88},
+        "line_dot": {"radius": 3.2, "gain": 5.0, "glow_sigma": 5.0, "glow_gain": 0.8, "glow_max": 0.45, "whiten": 0.2},
         "text_shadow": 0.8,  # a soft shadow under the letters, for legibility over the map
         "title_top": None,   # px from the top at 1080; default 250 vertical, 72 otherwise
         "credit_y": None,    # fraction of the height; default 0.80 vertical, the foot otherwise
@@ -81,6 +87,20 @@ DEFAULTS = {
 
 TOOL_CREDIT = "mapped.earth/transit-reels"
 
+MAX_CITIES = 9
+# A [grid] recipe: up to nine cities in one reel, the same hours of each on one clock.
+GRID = {"cities": [],       # recipe names beside this file, or {recipe, label, center, width_km}
+        "order": "count",   # "count": most vehicles first, so the grid reads as a ranking; "listed"
+        "columns": None,    # how many across; by default whatever makes the maps largest
+        "scale": "same",    # "same": one ground width for every map; "own": each city's framing
+        "width_km": None,   # with "same": how wide each map is; default the cities' median
+        "dot_scale": 0.55,  # size of lines and dots in a map, on the scale where 1 = a full reel
+        "gap": 6,           # px between maps, at 1080
+        "background": "#000000",
+        "count": True}      # each map's own vehicle count, under its name
+GRID_NOTE = "every scheduled vehicle · {start} local time"
+GRID_SUBTITLE = "each map is {km} km wide"
+
 
 def _merge(base: dict, over: dict) -> dict:
     out = copy.deepcopy(base)
@@ -92,7 +112,15 @@ def _merge(base: dict, over: dict) -> dict:
 def load(path: str | Path) -> dict:
     path = Path(path)
     with open(path, "rb") as f:
-        r = _merge(DEFAULTS, tomllib.load(f))
+        raw = tomllib.load(f)
+    r = _merge(DEFAULTS, raw)
+    if "grid" in raw:
+        r["grid"] = _merge(GRID, raw["grid"])
+        r["_raw_style"] = raw.get("style", {})
+        if "note" not in raw:
+            r["note"] = GRID_NOTE
+        if "subtitle" not in raw and r["grid"]["scale"] == "same":
+            r["subtitle"] = GRID_SUBTITLE
     # One feed under [feed], or several as [[feeds]] (cities whose agencies publish separately).
     r["feeds"] = [_merge(DEFAULTS["feed"], f) for f in r["feeds"]] if r.get("feeds") else [r["feed"]]
     if r["time"].pop("window", "peak") != "peak":
@@ -110,6 +138,35 @@ def load(path: str | Path) -> dict:
     r["slug"] = r.get("slug") or path.stem
     r["_dir"] = path.parent
     return r
+
+
+def cities(grid: dict) -> list[dict]:
+    """The city recipes of a [grid] recipe, each set to the grid's hours and under its style."""
+    entries = grid["grid"]["cities"]
+    if not 2 <= len(entries) <= MAX_CITIES:
+        raise SystemExit(f"[grid] cities: give 2 to {MAX_CITIES} cities (this one has {len(entries)}).")
+    out = []
+    for entry in entries:
+        spec = {"recipe": entry} if isinstance(entry, str) else entry
+        f = Path(spec["recipe"])
+        f = (f if f.is_absolute() else grid["_dir"] / f).with_suffix(".toml")
+        if not f.exists():
+            raise SystemExit(f"[grid] cities: no recipe at {f}")
+        warned = len(WARNINGS)
+        city = load(f)
+        del WARNINGS[warned:]  # about the city's own window, which the grid replaces
+        if "grid" in city:
+            raise SystemExit(f"[grid] cities: {f.name} is itself a grid.")
+        city["time"]["start"], city["time"]["minutes"] = grid["time"]["start"], grid["time"]["minutes"]
+        if grid["time"]["date"] != "next-weekday":
+            city["time"]["date"] = grid["time"]["date"]
+        city["style"] = _merge(city["style"], grid["_raw_style"])
+        city["label"] = spec.get("label") or city["title"] or city["slug"]
+        city["cell"] = {k: spec[k] for k in ("center", "width_km") if k in spec}
+        # Kept apart from the city's own bake, which has its own hours and day.
+        city["_bake_tag"] = f"-grid-{city['time']['start'].replace(':', '')}-{city['time']['minutes']}"
+        out.append(city)
+    return out
 
 
 def work_dir(recipe: dict) -> Path:
