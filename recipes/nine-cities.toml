@@ -11,4 +11,7 @@ cities = ["paris", "berlin", "new-york", "chicago", "hamburg", "toronto", "pragu
 
 [time]
 start = "08:00"
-minutes = 20
+minutes = 40
+
+[video]
+seconds = 20  # twice the single-city length: time to compare the maps

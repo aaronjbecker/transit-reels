@@ -1,4 +1,4 @@
-# France, nine cities: one hour, one date, one scale.
+# France, nine cities: forty minutes, one date, one scale.
 title = "France, 8 a.m."
 
 [grid]
@@ -7,4 +7,7 @@ cities = ["paris", "bordeaux", "toulouse", "marseille", "rennes", "grenoble", "n
 [time]
 date = "2026-11-10"
 start = "08:00"
-minutes = 20
+minutes = 40
+
+[video]
+seconds = 20  # twice the single-city length: time to compare the maps
