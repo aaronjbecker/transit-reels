@@ -51,7 +51,9 @@ class GridLayout(render.Layout):
                 y1 = self.credit_y - 14 * u  # the credit grows down from here
             else:
                 y1 = self.credit_y - (len(step_lines) - 1) * (f.size * 1.35 if f else 0) - 14 * u
-        cols, rows = shape(n, x1 - x0, y1 - y0, gap, columns)
+        # Columns and rows as for the full width, so the margin shrinks the maps but never
+        # reshapes the grid (a narrower area tips six maps from 3x2 to 2x3).
+        cols, rows = shape(n, x1 - x0 if beside else W - 2 * edge, y1 - y0, gap, columns)
         # Even sizes: each map is pasted whole and the frame stays even for the encoder.
         cw = int((x1 - x0 - gap * (cols - 1)) / cols) // 2 * 2
         ch = int((y1 - y0 - gap * (rows - 1)) / rows) // 2 * 2
