@@ -43,7 +43,9 @@ class GridLayout(render.Layout):
             self.right = x0 - 40 * u
             self.credit_x, self.credit_w = (self.left + self.right) / 2, self.right - self.left
         else:
-            x0, x1, y0 = edge, W - edge, self.bottom
+            # The maps line up with the words' 64 px column: a phone taller than 9:16 crops the
+            # sides of a full-screen reel, which cut off city names set 24 px from the edge.
+            x0, x1, y0 = self.left, self.right, self.bottom
             step_lines, f = render.credit_lines(credit, int(22 * u), self.credit_w) if credit else ([], None)
             if H > W:
                 y1 = self.credit_y - 14 * u  # the credit grows down from here
